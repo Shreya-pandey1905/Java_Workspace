@@ -4,21 +4,34 @@ import java.util.Scanner;
 
 public class AtmPinChecker {
     public static void main(String[] args) {
-        System.out.println("Enter your atm pin");
-        Scanner sc = new Scanner(System.in);
-        long user_pin = sc.nextLong();
 
-        long atm_pin = 7899;
+        Scanner sc = new Scanner(System.in);
+
+        int atmPin = 1234;
         int attempts = 3;
 
         for (int i = 1; i <= attempts; i++) {
-            if (user_pin != atm_pin) {
-                System.out.println("Invalid Pin");
+
+            System.out.print("Enter thr ATM Pin : ");
+            int userPin = sc.nextInt();
+
+            if (userPin == atmPin) {
+                System.out.println("Login successful");
+                System.out.println("Welcome to ATM Services");
                 break;
             } else {
-                System.out.println("Login Successful");
+                int remainingAttempts = attempts - i;
+
+                if (remainingAttempts > 0) {
+                    System.out.println("Invalid PIN. Attempts Remaining: "
+                            + remainingAttempts);
+                } else {
+                    System.out.println("Invalid PIN");
+                    System.out.println("Card Blocked. Please contact the bank.");
+                }
             }
-            atm_pin -= 1;
         }
+
+
     }
 }
