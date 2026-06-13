@@ -140,7 +140,7 @@ public class employeeManagement {
 	
 	}		
 	
-	//sort by Salary
+	//sort by Salaary
 	public static void sortBySalary(
 				List<Employee> list) {
 
