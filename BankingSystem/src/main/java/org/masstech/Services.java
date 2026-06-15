@@ -54,11 +54,22 @@ class Services {
         return null;
     }
 
-    public void depositAmountService(long accountNumber , double depositAmount ){
+    public void depositAmountService(long accountNumber , double depositAmount ) {
         Account ac = verifyAccount(accountNumber);
+
+//        if(ac.getStatus().equals("DORMANT"))
+//        {
+//            ac.setStatus("NORMAL");
+//        }
+
         ac.setAmount(depositAmount+ ac.getAmount());
 
         transactions.add("Account number: " + accountNumber  +"Deposited amount: " + depositAmount);
+        if(ac.getStatus().equals("DORMANT"))
+        {
+            ac.setStatus("NORMAL");
+        }
+
 
 
         System.out.println("Your amount deposited successfully ");
@@ -67,9 +78,19 @@ class Services {
 
     }
 
-    public void withdrawAmountService(long accountNumber, double amountWithdrawn) {
-
+    public void withdrawAmountService(long accountNumber, double amountWithdrawn)
+//            throws DormantAccException
+    {
         Account account = verifyAccount(accountNumber);
+
+//Dormant logic
+
+
+//        if(account.getStatus().equals("DORMANT"))
+//        {
+//            throw new DormantAccException(
+//                    "Account is dormant you can only deposit");
+//        }
 
          if (account.getAccountType() == Account.AccountType.SAVING) {
 
@@ -111,9 +132,18 @@ class Services {
         }
     }
 
-    public void transferAmountService(long accountNumber, double amountTransferred){
+    public void transferAmountService(long accountNumber, double amountTransferred)
+//            throws DormantAccException
+    {
 
         Account account = verifyAccount(accountNumber);
+
+
+//        if(account.getStatus().equals("DORMANT"))
+//        {
+//            throw new DormantAccException(
+//                    "Account is dormant you can only deposit");
+//        }
 
         if (account.getAccountType() == Account.AccountType.SAVING) {
 
@@ -156,36 +186,39 @@ class Services {
 
     }
 
-    public void generateMonthlyStatements() {
+    public void generateMonthlyStatements(long accountNumber) {
+        Account account = verifyAccount(accountNumber);
 
-        System.out.println("Here's your monthly statement: ");
+        if (account == null) {
+            System.out.println("Account not found");
+            return;
+        }
 
-        if(transactions.isEmpty()){
+        System.out.println("Here's your monthly statement:");
+
+        if (transactions.isEmpty()) {
             System.out.println("No transactions found");
             return;
         }
 
-        for(String transaction : transactions){
-            System.out.println(transaction);
-
-            for(Account account : list){
-
-                double interestRate;
-
-                if(account.getAccountType() == Account.AccountType.SAVING){
-                    interestRate = 6;
-                } else {
-                    interestRate = 2;
-                }
-
-                double interest = account.getAmount() * interestRate / 100;
-
-
-                System.out.println( "Account Number: " + account.getAccountNumber() +"Account Type: " + account.getAccountType() +  "Interest rate " + interest);
-
-
-
+        for (String transaction : transactions) {
+            if (transaction.contains(String.valueOf(accountNumber))) {
+                System.out.println(transaction);
             }
         }
+
+        double interestRate;
+
+        if (account.getAccountType() == Account.AccountType.SAVING) {
+            interestRate = 6;
+        } else {
+            interestRate = 2;
+        }
+
+        double interest = account.getAmount() * interestRate / 100;
+
+        System.out.println("Account Number: " + account.getAccountNumber() + " Account Type: " + account.getAccountType() + " Interest amount: " + interest);
+
     }
-}
+
+    }

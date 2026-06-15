@@ -1,5 +1,7 @@
 package org.masstech;
 
+import java.time.LocalDate;
+
 class Account {
 
     @Override
@@ -17,17 +19,28 @@ class Account {
     private AccountType accountType;
     private double amount;
 
+    private String status;
+
     enum AccountType {
         SAVING,
         CURRENT
     }
 
-    public Account(String accountHolder, long accountNumber,
-                   AccountType accountType, double amount) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Account(String accountHolder, long accountNumber, AccountType accountType, double amount) {
         this.accountHolder = accountHolder;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.amount = amount;
+
+        this.status = "NORMAL";
     }
 
     public String getAccountHolder() {

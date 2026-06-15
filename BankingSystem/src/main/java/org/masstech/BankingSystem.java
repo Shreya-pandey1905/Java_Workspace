@@ -60,9 +60,16 @@ import java.util.Scanner;
 
                     System.out.println("Enter amount to withdraw");
                     double withdrawAmount = sc.nextDouble();
-
                     services.withdrawAmountService(accountNumber, withdrawAmount);
 
+//                    try{
+//
+//                        services.withdrawAmountService(accountNumber, withdrawAmount);
+//                    }
+//                    catch(DormantAccException e)
+//                    {
+//                        System.out.println(e.getMessage());
+//                    }
                     break;
                 }
 
@@ -75,14 +82,26 @@ import java.util.Scanner;
 
                     services.transferAmountService(accountNumber, transferAmount);
 
+//                    try
+//                    {
+//                        services.transferAmountService(accountNumber, transferAmount);
+//                    }
+//                    catch(DormantAccException e)
+//                    {
+//                        System.out.println(e.getMessage());
+//                    }
+
+
                     break;
                 }
 
                 case 6:
                 {
 
-                    services.generateMonthlyStatements();
+                    System.out.println("Enter account number");
+                    long accountNumber = sc.nextLong();
 
+                    services.generateMonthlyStatements(accountNumber);
                 }
 
 
