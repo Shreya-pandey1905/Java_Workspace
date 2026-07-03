@@ -1,0 +1,37 @@
+Situation 1: 
+When you want to represent a real world entity OOPS concepts for this are class and Objects 
+examples are Students , employee or car 
+
+Situation 2:
+Protecting Data from direct access
+- Encapsulation concept will be used 
+example - bank account 
+
+Situation 3:
+Reuse the code 
+OOPS concept -inheritance 
+example - Vehicle and Car , both can be related .
+
+Situation 4:
+
+Different behavior with same operation with different behavior 
+Oops concept- Polymorphism
+example- Payment modes
+
+Situation 5: 
+
+Hiding implementation details 
+OOPS concept - Abstraction
+example - Atm gateway
+
+Situation 6:
+
+Define a common capability for unrelated classes
+OOps concept - Interface
+example - Notification, Payment 
+
+Situation 7:
+
+Share state and partial implementation among closely related classes
+OOPS concept - abstract class
+example - Shape 

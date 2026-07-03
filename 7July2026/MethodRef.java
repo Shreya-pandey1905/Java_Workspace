@@ -21,3 +21,5 @@ public class MethodRef {
 }
 
 //contructor ref using new operator
+// lambda can be used for verifying before login
+//method ref is more suggested than lambda 

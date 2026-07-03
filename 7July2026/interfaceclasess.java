@@ -14,6 +14,7 @@ class B implements A {
 
 class interfaceclasess {
 	 public static void main(String[] args){
+		// lamda use kar rhe hai idhar jo B class ke similar hai 
 		 A ref = () ->  System.out.println("demo ");
 		 ref.test();
 		 
