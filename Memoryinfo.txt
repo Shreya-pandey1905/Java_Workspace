@@ -1,0 +1,119 @@
+A) JVM Memory Areas
+
+1) Heap:
+
+Heap is the area where all the java objects are stored. The ref variable is stored in stack memory if its a local variable.
+Heap is shared by all application threads . Heap stores object , instant variables , arrays, collections and runtime data
+
+Young gen- new obj are usually created in Eden. When Eden fills up a minor gc happens , object that survives multiple minor gc are moved to old gen . 
+Long lived objects are stored here :
+-> App caches 
+-> Singleton bin 
+-> Long lived collections 
+-> Session data
+-> Static references 
+
+Minor gc means Young gen 
+Major gc means old gen ( memory and costwise that will be more expensive .)
+Full gc cleans entire heap and sometimes metaspace as well
+
+
+
+2) Stack
+
+each thread has its own stack , it stores 
+1. Method call frames 
+2. local variables 
+3. method params 
+4. references to heap object
+
+class emp{
+public void process (int count, int ref){
+
+}
+}
+
+stack will take count =10 ref and object in heap
+when the method finishes the stack frame is removed 
+stack memory is short lived while heap is managed by garbage collection
+
+
+3) Metaspace
+Before java 8 the class metadata is stored in permgem , from java 8 onwards , class metadata , is stored in metaspace . Metaspace stores class metadata , method metadata , runtime constant pool , field information, class loader info.
+
+
+4) Program counter register 
+Each thread has its own program counter register . It stores the address of current jvm instruction be executed
+
+native method stack
+this gets called when java code call native methods  written in lang like c , c++
+System.currenttimeMillis;
+
+B) Object Lifecycle 
+
+1.class loaded 
+2.object created using new 
+object used by application
+if deallocated object becomes unreachable
+eligible for garbage collection 
+memory reclaimed 
+
+C) Garbage collection
+->	Processed by JVM , automatically removes unreachable object from heap
+	An obj becomes available for gc when no live thread can reach it .
+->	Garbage collection is not immediately called . 
+	System.gc does not guarantee immediate garbage collection, it only suggests jvm that garbage colllection may be usefull that time .
+
+
+Most jvm gc , organize heap based on object age 
+
+Memory Leak:
+	A memory leak in java happens when objects are no longer needed but are still reachable through references and since they are reachable gc cannot remove them
+
+
+private static final List<Object> ll = new ArrayList<>();
+public void add (Object){
+ll.add(100);
+}
+
+If objects are continuously added and never removes memory usage grows.
+Common causes : 
+-> static collections 
+-> Unbounded caches 
+-> unclosed resources 
+-> thread local misuse 
+-> listeners not being removes 
+-> large http sessions.
+-> holding references in long lived objects 
+
+Memory Management in Spring boot :
+
+Memory issues often come from loading large resultset from database .
+Returning Huge API responses .
+Inproper caching.
+Large file upload handling
+Unclosed Streams 
+Thread local not clean
+Excessive obj creation in loops.
+Too many bins or dynamically generated proxies 
+
+
+List <Employee> ll= empRepo.findAll
+
+For this code better approaches are :
+-> Pagination
+-> Streaming
+-> Batch Processing
+->Query Only required columns 
+->Used DTO projections
+
+Visual vm
+java Machine control 
+j console 
+eclipse MAT 
+JMAP
+JSTACK 
+GCLOGS 
+
+Gcroutes are starting points used by gc to determine reachable objects . 
+e.g Local variables in active stack frames , static fields , active threads , and system class loader references

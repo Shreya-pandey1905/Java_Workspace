@@ -1,0 +1,38 @@
+it checks syntax error , type safety , method availability , access modifiers , check exception s m import dependencies 
+2) compile using java c
+
+
+3) class loading 
+jvm starts and uses a class loader subsystem to load required class into the memory
+
+4) byte code verification - jvm verifies the bytecode before the execution , it checks
+ is the bytecode structurally valid ,
+are stack operations safe ?
+are access rules validated ?
+are there any illegal memory operation ?
+is type safety maintained ?
+
+this improves java security 
+
+5) excecution engine run the bytecode 
+finally it suns and give the final result 
+
+jvm execution engine executes bytecode using jit compiler and interpreter 
+
+INterpreter does what ? - read and executes bytecode line by line 
+starts execution quickly but slower for repeated code 
+
+What jit does ? 
+JIT identitfies frequently executed code and compiles it into native machine code 
+JIT improves runtime performance and run the faster the next time 
+
+Q.  Your java app runs in local machine but fails in production
+ans) 1. May be different java versions 
+	2. Missing env variables 
+	3. OS specific file path 
+	4. Native libraries 
+	5. Configuration differences 
+	6. Dependency version mismatch 
+
+
+
