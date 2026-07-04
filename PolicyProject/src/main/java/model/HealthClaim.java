@@ -10,6 +10,7 @@ public class HealthClaim extends Claim {
 
     @Override
     public String getClaimType() {
+
         return "Health Claim";
     }
 }

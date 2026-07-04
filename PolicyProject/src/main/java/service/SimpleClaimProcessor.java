@@ -19,8 +19,8 @@ public class SimpleClaimProcessor implements  ClaimProcessor{
              return claim.getStatus();
          }
          double approvedAmount=claim.getClaimAmount()*policy.getCoverageAmount();
-         claim.approve();
-         return ;
+         claim.approve(policy.getPremiumAmount());
+         return claim.getStatus() ;
 
     }
 }
