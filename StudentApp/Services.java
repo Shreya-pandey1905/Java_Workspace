@@ -7,7 +7,6 @@ import java.util.Scanner;
     String[] names;
     int[][] marks;
     int count = 0;
-     int maxStudent=0;
 
     public Services(int maxStudent) {
         names = new String[maxStudent];
@@ -33,7 +32,7 @@ import java.util.Scanner;
             names[count] = sc.nextLine();
 
             for (int j = 0; j < 3; j++) {
-                System.out.print("Enter Marks"+ (j + 1) +" :");
+                System.out.print("Enter Subject: " +  " Marks: "+(j + 1) );
                 marks[count][j] = sc.nextInt();
             }
 
@@ -42,8 +41,9 @@ import java.util.Scanner;
         }
 		
         System.out.println("Student added successfully.");
-		
-		if (count == maxStudent){
+
+        int maxStudent;
+        if (count == maxStudent){
 			System.out.println("Limit exceeded");
 		}
 
