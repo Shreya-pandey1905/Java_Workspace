@@ -1,0 +1,21 @@
+Comparable Interface 
+Java provides a comparable interface to define natural ordering for object for a custom class 
+By implementing comparable interface a class can provide single natural ordering that can be used to sort its instances.
+
+How compareTo methods works ?
+
+1.It return integer which means a negative integer will be return if the current object is less than the specified object.
+2.It returns 0 if the current object is equal to the specified object 
+3.It returns a +ve integer if the current obj is greqter than the specified object.
+
+Limitations of Comparable
+1. The primary limitation is that it allows only 1 natural sorting for an object of the class .
+if we want to sort a person class based on age and weight it will not be sort .
+
+Comparator Interface 
+
+CI in java provides a way to define multiple ways to compare fields of an object
+We can sort person class based on age weight or id etc  which was not happening in the Comparable. 
+
+
+Collections.sort does not sorting custom classes 
