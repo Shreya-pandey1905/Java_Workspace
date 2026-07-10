@@ -1,21 +1,13 @@
 package org.example;
 
-import java.lang.reflect.Type;
 import java.sql.*;
-import java.util.Scanner;
 
 public class ProcedureCall {
 
     public static void main(String[] args) throws Exception {
 
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String jdbc_url = "jdbc:mysql://localhost:3307/jdbc";
-        String user = "root";
-        String pwd = "";
 
-        Class.forName(driver);
-
-        Connection conn = DriverManager.getConnection(jdbc_url, user, pwd);
+        Connection conn =   DBConnection.connection();
 
 
                CallableStatement cs = conn.prepareCall("{call JDBCTEST(?,?,?)}");

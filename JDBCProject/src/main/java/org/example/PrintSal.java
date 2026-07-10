@@ -11,14 +11,7 @@ public class PrintSal {
 
     public static void main(String[] args) throws Exception {
 
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String jdbc_url = "jdbc:mysql://localhost:3307/jdbc";
-        String user = "root";
-        String pwd = "";
-
-        Class.forName(driver);
-
-        Connection conn = DriverManager.getConnection(jdbc_url, user, pwd);
+   Connection conn =   DBConnection.connection();
 
 
         CallableStatement cs = conn.prepareCall("{call PRINTSAL(?,?)}");
@@ -33,8 +26,6 @@ public class PrintSal {
 
         cs.execute();
 
-
-        conn.close();
         cs.close();
     }
 }
