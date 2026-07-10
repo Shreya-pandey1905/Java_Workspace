@@ -1,0 +1,23 @@
+lifecycle of sql query execution-
+for any type of query database engine performs some set of activities :
+1.Compilation
+2. Execution
+3.Resultset or fetchResult
+
+A)Compilation Steps
+
+1.Query Tokenisation : in this step the sql query will be divided into number of tokens and generate a stream of tokens as output.
+ 
+2.Query  Parsing: In this step ,db engine will create parse tree(Query Tree) with stream of tokens.If  the query tree is proper then there is no syntactical mistakes in that query.
+If the query tree construction fails, it indicates that there are some syntactical errors in the query and sql exception will be raised.
+
+3.Query Optimisation: The main purpose of query optimization is to improve performance and in this step , an optimized query tree will be generated.
+
+B)Execution: Once compilation succeeds db engine will take that query tree as input and executes that queryby using interpreter.
+
+C) Fetch Result : Db Engine will provide the result of the sql query either in the form of the result set (for select query) or in the form of row count (for non select query).
+
+Need of Prepared Statement:
+
+In case of normal statement whenever we are executing the sql query,every time compilation and execution will happen at db side. Sometimes in our app we require to execute same query multiple times for same or different inputs. 
+e.g - listing out trains between same source and destination . In this case the statement query will be executed lakhs of time per day to overcome this problem we should go for prepared statement , main adv of prepared statement is the query will be compiled only once even though we are executing it multiple times so that overall performance of the application will be improved
