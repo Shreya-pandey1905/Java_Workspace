@@ -9,6 +9,7 @@ import model.Driver;
 import service.AuthService;
 import service.RideService;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -36,6 +37,12 @@ public class StartupUtil {
                 switch (choice){
                     case 1 -> registerCustomer();
                     case 2 -> loginCustomer();
+                    case 3-> registerDriver();
+                    case 4 -> loginDriver();
+                    case 0 -> {
+                        System.out.println("Thank you!");
+                        return;
+                    }
                 }
             }
             catch (Exception exception){
@@ -51,9 +58,25 @@ public class StartupUtil {
         return scanner.nextLine();
     }
 
+    private BigDecimal readDecimal(String label){
+        System.out.print(label);
+        BigDecimal value = scanner.nextBigDecimal();
+        scanner.nextLine();
+        return value;
+    }
+
+    private boolean readBoolean(String label){
+        System.out.print(label);
+        boolean value = scanner.nextBoolean();
+        scanner.nextLine();
+        return value;
+    }
+
     private int readInt(String label){
         return Integer.parseInt(readLine(label));
     }
+
+
 
     private void registerCustomer() throws SQLException{
         Customer customer = authService.registerCustomer(
@@ -75,7 +98,34 @@ public class StartupUtil {
             System.out.println("You are successfully loggedin :"+ customer.getId());
         }
 
-        private void customerMenu(Customer customer) throws SQLException{
+    private void registerDriver() throws SQLException {
+
+        Driver driver = authService.registerDriver(
+                readLine("Name: "),
+                readLine("Email: "),
+                readLine("Phone: "),
+                readLine("Password: "),
+                readLine("Vehicle No: "),
+                readLine("Current Location: "),
+                readBoolean("Available (enter true or false ): "),
+                readDecimal("Rating: ")
+        );
+
+        System.out.println("Driver register with id: "+ driver.getId());
+
+    }
+
+    private void loginDriver() throws  SQLException{
+        Driver driver = authService.loginDriver(
+                readLine("Email: "),
+                readLine("Password: ")
+        );
+        System.out.println("You are successfully loggedin :"+ driver.getId());
+    }
+
+
+
+    private void customerMenu(Customer customer) throws SQLException{
         while (true){
             System.out.println("Customer menu"+ customer.getName());
             System.out.println("1 for Book Ride");
@@ -85,7 +135,7 @@ public class StartupUtil {
             int choice = readInt("choose: ");
 
             switch (choice){
-                case 1->
+
             }
         }
         }

@@ -4,8 +4,14 @@ import java.math.BigDecimal;
 
 public class Driver {
     private long id;
+    private String email;
+    private String phone;
+    private String vehicleNo;
+    private String currentLocation;
+    private boolean available;
+    private BigDecimal rating;
 
-    public Driver(String name, long id, String email, String phone, String vehicleNo, String currentLocation, boolean available, BigDecimal rating) {
+    public Driver( long id,String name, String email, String phone, String vehicleNo, String currentLocation, boolean available, BigDecimal rating) {
         this.name = name;
         this.id = id;
         this.email = email;
@@ -50,12 +56,7 @@ public class Driver {
         return rating;
     }
 
-    private String email;
-    private String phone;
-    private String vehicleNo;
-    private String currentLocation;
-   private boolean available;
-   private BigDecimal rating;
+
 
 
 

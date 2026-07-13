@@ -4,8 +4,10 @@ import dao.AdminDao;
 import dao.CustomerDao;
 import dao.DriverDao;
 import model.Customer;
+import model.Driver;
 import util.PasswordUtil;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 public class AuthService {
@@ -30,6 +32,13 @@ public class AuthService {
         return customerDao.findByEmailAndPassword(email,PasswordUtil.hash(password));
 
     }
+    public Driver registerDriver(String name, String email, String phone, String password, String vehicle_no, String current_location, Boolean available, BigDecimal rating) throws SQLException {
+            return driverDao.create(name, email,phone,PasswordUtil.hash(password),vehicle_no,current_location,available,rating);
+    }
+    public Driver loginDriver(String email,String password) throws SQLException{
+        return driverDao.findByEmailAndPassword(email,PasswordUtil.hash(password));
+    }
+
 
 
 }
