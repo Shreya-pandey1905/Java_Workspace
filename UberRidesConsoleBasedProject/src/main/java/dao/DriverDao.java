@@ -85,12 +85,12 @@ public class DriverDao {
     public void updateAvailability(long driverId, boolean available) throws SQLException {
         String sql = "update drivers set available =? where id=?";
         try (Connection connection = DBConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+             PreparedStatement statement = connection.prepareStatement(sql))
+        {
             statement.setBoolean(1, available);
             statement.setLong(2, driverId);
             statement.executeUpdate();
-        }
+       }
     }
 
 
