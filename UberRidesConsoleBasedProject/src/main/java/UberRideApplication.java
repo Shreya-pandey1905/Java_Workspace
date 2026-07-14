@@ -1,3 +1,4 @@
+import util.PasswordUtil;
 import util.StartupUtil;
 
 public class UberRideApplication {

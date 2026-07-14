@@ -2,11 +2,14 @@ package dao;
 
 import config.DBConnection;
 import model.Customer;
+import model.Driver;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDao {
     //TODO:REGISTER CUSTOMER
@@ -61,6 +64,20 @@ public class CustomerDao {
                 return resultSet.next()? map(resultSet):null;
             }
         }
+    }
+
+    public List<Customer> findAll() throws SQLException {
+        String sql = "select * from customers order by created_at desc";
+
+        List<Customer> customers = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                customers.add(map(resultSet));
+            }
+        }
+        return customers;
     }
 
     private Customer map(ResultSet resultSet) throws SQLException{

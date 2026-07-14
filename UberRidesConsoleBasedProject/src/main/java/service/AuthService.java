@@ -3,6 +3,7 @@ package service;
 import dao.AdminDao;
 import dao.CustomerDao;
 import dao.DriverDao;
+import model.Admin;
 import model.Customer;
 import model.Driver;
 import util.PasswordUtil;
@@ -38,6 +39,11 @@ public class AuthService {
     public Driver loginDriver(String email,String password) throws SQLException{
         return driverDao.findByEmailAndPassword(email,PasswordUtil.hash(password));
     }
+
+    public Admin loginAdmin(String email, String password) throws SQLException {
+        return adminDao.findByEmailAndPassword(email,PasswordUtil.hash(password));
+    }
+
 
 
 

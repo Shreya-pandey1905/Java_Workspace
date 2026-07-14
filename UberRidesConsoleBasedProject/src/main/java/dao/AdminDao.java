@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class AdminDao {
 public Admin findByEmailAndPassword(String email, String passwordHash) throws SQLException {
-    String sql = "select * from admin where email=? and password_hash=?";
+    String sql = "select * from admins where email=? and password_hash=?";
     try (Connection connection = DBConnection.getConnection();
          PreparedStatement statement = connection.prepareStatement(sql)
     ) {
