@@ -27,15 +27,23 @@ public class ClaimService {
         }
     }
 
-    public Status processClaim(String claimId){
-      Claim claims1=  findClaimById(claimId);
-        if (claims1==null){
-            throw new IllegalArgumentException(claimId + "Not found");
+    private static void processClaim() {
+        System.out.println("Enter Claim ID to process: ");
+        String claimId = sc.next();
+        Claim claim = CLAIM_SERVICE.findClaimById(claimId);
 
+        if (claim == null) {
+            System.out.println("Claim not found.");
+            return;
         }
-        return claimProcessor.process(claims1);
-    }
 
+        Status status = CLAIM_SERVICE.processClaim(claimId);
+        System.out.println("Claim processed. Current status: " + status);
+        System.out.printf("Approved amount: %.2f%n", claim.getApprovedAmount());
+        if (!claim.getRejectionReason().isBlank()) {
+            System.out.println("Reason: " + claim.getRejectionReason());
+        }
+    }
     private final ClaimProcessor claimProcessor;
 
 }

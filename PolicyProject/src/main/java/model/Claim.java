@@ -19,8 +19,17 @@ public abstract class Claim {
     }
 
     public abstract String getClaimType();
-    public void getSummary(){
-
+    public String getSummary() {
+        return String.format(
+                "Claim ID: %s | Type: %s | Customer: %s | Policy: %s | Claimed: %.2f | Approved: %.2f | Status: %s",
+                claimID,
+                getClaimType(),
+                policy.getCustomer().getCustomerName(),
+                policy.getPolicyId(),
+                claimAmount,
+                approvedAmount,
+                status
+        );
     }
     public void approve(double amt){
         this.status=Status.APPROVED;
