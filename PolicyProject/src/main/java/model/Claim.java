@@ -14,22 +14,31 @@ public abstract class Claim {
         this.policy = policy;
         this.claimAmount = claimAmount;
         this.status = Status.REGISTERED;
-        this.approvedAmount = approvedAmount;
-        this.rejectionReason = null;
+        this.approvedAmount = 0.0;
+        this.rejectionReason = "";
     }
 
     public abstract String getClaimType();
+
     public String getSummary() {
-        return String.format(
-                "Claim ID: %s | Type: %s | Customer: %s | Policy: %s | Claimed: %.2f | Approved: %.2f | Status: %s",
-                claimID,
-                getClaimType(),
-                policy.getCustomer().getCustomerName(),
-                policy.getPolicyId(),
-                claimAmount,
-                approvedAmount,
-                status
-        );
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Claim ID: ").append(claimID)
+                .append("\nClaim Type: ").append(getClaimType())
+                .append("\nCustomer: ").append(policy.getCustomer().getCustomerName())
+                .append("\nPolicy ID: ").append(policy.getPolicyId())
+                .append("\nClaim Amount: ").append(claimAmount)
+                .append("\nStatus: ").append(status);
+
+        if(status == Status.APPROVED){
+            sb.append("\nApproved Amount: ").append(approvedAmount);
+        }
+
+        if(status == Status.REJECTED){
+            sb.append("\nReason: ").append(rejectionReason);
+        }
+
+        return sb.toString();
     }
     public void approve(double amt){
         this.status=Status.APPROVED;

@@ -1,11 +1,18 @@
 package model;
 
+public class Customer {
 
-public class Customer{
+    private final String customerID;
+    private String customerName;
+    private String phoneNo;
 
-    final  private  int customerID;
+    public Customer(String customerID, String customerName, String phoneNo) {
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.phoneNo = phoneNo;
+    }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
@@ -17,20 +24,11 @@ public class Customer{
         this.customerName = customerName;
     }
 
-    public long getPhoneNo() {
+    public String getPhoneNo() {
         return phoneNo;
     }
 
-    public void setPhoneNo(long phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
-    }
-
-    private String customerName;
-    private long phoneNo;
-
-    public Customer(int customerID,String customerName,long phoneNo){
-        this.customerID= customerID;
-        this.customerName= customerName;
-        this.phoneNo= phoneNo;
     }
 }
