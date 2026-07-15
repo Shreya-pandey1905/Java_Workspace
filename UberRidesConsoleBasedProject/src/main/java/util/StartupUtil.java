@@ -16,8 +16,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class StartupUtil {
-   private final Scanner scanner = new Scanner(System.in);
+    private static final Logger logger = LoggerFactory .getLogger(StartupUtil.class);
+
+    private final Scanner scanner = new Scanner(System.in);
     private final CustomerDao customerDao = new CustomerDao();
     private final DriverDao driverDao = new DriverDao();
     private final RideDao rideDao = new RideDao();
@@ -26,12 +31,12 @@ public class StartupUtil {
 
     public void start(){
         while (true){
-            System.out.println("Uber ride Appplication");
-            System.out.println(" 1 for Customer Register");
-            System.out.println(" 2 for Customer Login");
-            System.out.println(" 3 for Driver Register");
-            System.out.println(" 4 for Driver Login");
-            System.out.println(" 5 Admin Login");
+            logger.info("Uber ride Appplication");
+            logger.info(" 1 for Customer Register");
+            logger.info(" 2 for Customer Login");
+            logger.info(" 3 for Driver Register");
+            logger.info(" 4 for Driver Login");
+            logger.info (" 5 Admin Login");
             System.out.println(" 0 for exit");
 
             int choice = readInt("Choose: ");
