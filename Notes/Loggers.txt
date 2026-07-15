@@ -1,0 +1,121 @@
+# Logging meaning:
+	Recording application events while the application is running . 
+	Instead of Printing messages with System.out.println(), we use logger.info("User{}loggedin",userName");
+
+# Logging records:
+  1.Errors
+  2.Warnings
+  3.Buisness Events.
+  4. Performance info
+  5.Security events into files.monitoring system.     
+
+
+# Java Logging Frameworks :
+
+1.java.util.logging
+2.Apachelog4J.
+3.Logback.
+
+Most springboot appln use SLF4J+logback.
+
+Q) What is SL4J?
+
+A. Simple Logger facade for java. The word facade does not mean perform login, it provide a common api.
+
+SLF4J ---------> implementations---->LOGBACK ,log4J, JUL
+
+Even if the implementation hange our code doesn't get affected.
+
+# Logging levels
+
+1. Trace
+	purpose: Most detailed
+	example: every loop iteration.
+2. Debug
+	purpose: Developer debugging .
+	example: SQL generated
+3. Info
+	purpose: Normal business event.
+	example : User login.
+4. Warn
+	purpose: unexpected event but appln continues.
+	example: Retrying an action.
+5. errors
+	purpose: failure of appln
+	example : db connection fail
+
+
+# Best practices for logging
+
+1. Log meaningful business events(order 101 created) .
+2. Use appropriate log levels(info for normal flow, warn for recoverable issues, error for failures etc) .
+3. Use placeholders for unique id wise tracker - can use logger.info.
+4. Always include exception while logging error.
+5. Include request ids in distributed system to trace a request across services.
+6. Avoid logging passwords , cr card no.s, authentication tokens or other sensitive data.
+7. Avoid excessive debug logging in production because it can impact performance nd increase storage cost .
+
+# Observerability 
+
+It is the ability to understand what is happening inside a running application without modifying its code . Its helps answers qns like :
+
+1. Why the appln is running slow?
+2. Which request failed?
+3. Which service is causing errors ?
+4. How many users are affected ?
+
+# Observerability is based on 3 pillars.
+
+1. Logs - detailed event records.
+2. Matrix- Numerical measurements e.g - CPU usage, request count , avg response time etc.
+3. Traces-  End to end request flow across multiple services.
+
+# Why logging matters in production?
+
+case - Imagine  a user paid 10k and his orders is still pending.
+
+Without logs - You don't know when the payment request was received ,
+	       You cant determine whether the payment gateway responded or not ,
+	       You don't know if the stock reservation failed , Finding the issue may be impossible.
+
+With logs-
+	INFO -> Payment received for 101.
+	INFO -> Payment successful for 101.
+	ERROR -> While deducting stock reservation for 101.
+	WARN -> Order status moved to pending for 101.
+
+
+# Production Troubleshooting Workflow
+
+1. Identify the affected request using a request id or order id or customer id .
+2. Filter logs by that id .
+3. Look for ERROR and WARN entries around the failure time.
+4. Review the stack trace to identify source of exception.
+5. Correlate logs across dependent services if the appln is distributed. 
+6. Verify matrix (CPU usage, Memory, db latency) to see if infrastructure was the reason for this issue.
+7. Implement the fix.
+8. Deploy it 
+9. Monitor new logs to confirm whether the problem is solved or not.
+
+
+Q. Why is sop unsuitable for production application
+
+ ->1.No log levels.
+2. Cannot disable msgs.
+3. No timestamp.
+4. No filelogging.
+5. No thread info .
+
+Q. What is slf4j why it is called as facade ?
+
+1. Facade-> it is an exception layer over a different logging frameworks.
+2. SLF4J forwards the logs to an actual implementation.
+3. facade is design pattern which provides a single interface without a implementation.
+
+Q. What are the logging levels 	
+
+
+
+logger tool - splunk to see the complete flow.
+for matrix there is tool grephana for visualisation
+

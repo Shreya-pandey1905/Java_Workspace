@@ -1,0 +1,50 @@
+-- create database uberrides;
+-- use uberrides;
+
+DROP TABLE IF EXISTS rides;
+DROP TABLE IF EXISTS drivers;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS admins;
+
+CREATE TABLE customers (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    phone VARCHAR(20) NOT NULL,
+    password_hash VARCHAR(128) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE drivers (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    phone VARCHAR(20) NOT NULL,
+    password_hash VARCHAR(128) NOT NULL,
+    vehicle_no VARCHAR(30) NOT NULL UNIQUE,
+    current_location VARCHAR(100) NOT NULL,
+    available BOOLEAN NOT NULL DEFAULT TRUE,
+    rating DECIMAL(3, 2) NOT NULL DEFAULT 5.00,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE admins (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password_hash VARCHAR(128) NOT NULL
+);
+
+CREATE TABLE rides (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    customer_id BIGINT NOT NULL,
+    driver_id BIGINT,
+    pickup_location VARCHAR(100) NOT NULL,
+    drop_location VARCHAR(100) NOT NULL,
+    fare DECIMAL(10, 2) NOT NULL,
+    status ENUM('REQUESTED', 'ACCEPTED', 'CANCELLED', 'COMPLETED', 'FAILED') NOT NULL,
+    requested_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_rides_customer FOREIGN KEY (customer_id) REFERENCES customers(id),
+    CONSTRAINT fk_rides_driver FOREIGN KEY (driver_id) REFERENCES drivers(id)
+);
