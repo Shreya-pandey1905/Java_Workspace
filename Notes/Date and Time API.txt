@@ -1,0 +1,40 @@
+					Date and Time API
+
+
+Problem with older APIs :
+
+java.util.date
+java.util.calendar
+SimpleDateFormat
+
+Above classes have few problems:
+1. Mutable 
+2.Assigning month was complex
+3. First month count started from 0 and simple date format was not safe .
+Java 8 solved all these issues with package java.time
+
+Characteristics of java 8
+Immutable 
+Thread safe 
+Clear names 
+ISO standards
+
+Main classes:
+
+1. Local Date :
+	stores only date
+2. Local Time:
+	stores only time
+3. LocalDateTime:
+	stores both date time
+4.ZonedDateTime:
+	stores both date time based on zone.
+5. Instant:
+	for Timestamp
+6.Duration:
+	Time difference
+7. Period:
+	Date difference .
+8.DatetimeFormatter:
+	for format 	
+

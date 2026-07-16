@@ -1,0 +1,42 @@
+Var allows java compiler to automatically determine or infer the type of local variable from the value assign to it. This has no impact on performance because avr is only a compile time feature.
+Var was introduced for large generic declarations which were difficult to read. This feature doesn't make java a dynamically type lang, Java still is statically typed lang.
+
+-> In which case var is used?
+
+var with loops is allowed
+var with stream is allowed
+var with try with resources is allowed.
+
+-> Placed where var cannot be used.
+
+cannot use in class scope variable
+
+cannot use with null assignment
+cant use with method  params 
+cannot use it with method return type .
+
+use to hold return values of variable 
+
+# Best Practices to use var
+
+1. Use var when the type is obvious from RHS initialization.
+2. Use var with long generic declaration.
+3. Use var inside loops.
+4. Avoid var of it reduces redability.
+
+var does not affect on performance.
+
+
+# Switch expressions (Indroduced in jdk 14)
+
+Problems with older switch case:
+1. Require multiple break statements.
+2. Easier to fall under fall through.
+3. Could not directly return a value.
+
+
+# Adv of moder switch case:
+
+1. More concise.
+2. Easier to read.
+3. Able to return values.

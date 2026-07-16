@@ -1,0 +1,8 @@
+Where to use switch expressions.
+
+1. Mapping one value to another
+2. Returning values.
+3. Enum constant handling.
+4. Error code mapping.
+5. Role based configuration.
+

@@ -1,0 +1,30 @@
+Records
+
+Records was introduced in java 16. A record is a special kind of class designed to model immutable data.
+A class who's primary purpose to carry data. For a record compiler automatically generates a 1.constructor 
+2.getter like accessor methods, equals methods , hashcode and toString
+
+
+Record is a java feature while Lombok is a third  party library , records are immutable by default while Lomboks are mutable.
+No dependency needs to be added for records and Lombok require dependency.
+Records has concise syntax , Lombok is annotation based .
+Records are best option for DTO's and lomboks is best suitable for mutable bins and legacy code.
+
+Limitations of records :
+1. Cant extends another class, they implicitly extend java.lang.record.
+2. Records are implicitly final , they cannot be inherited.
+3. Instant fields are fixed based on record components , so we cannot add extra instance fields.
+4. Suitable for immutable data carriers not for entities with changing data. 
+
+Use Records for :
+1. API request response DTO's .
+2. Readonly configuration object.
+3. Event payloads (kafka).
+4. Value objects.
+5. DB projection results.
+6. Avoid records for:
+	JPA Entities,
+ 	Classes with significant business logic,
+ 	Object whos state changes overtime.
+
+# Pattern Matching for instanceOf(jdk 16)
