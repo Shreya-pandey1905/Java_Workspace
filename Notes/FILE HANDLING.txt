@@ -1,0 +1,36 @@
+FILE HANDLING
+->File handling is the process for creating, reading , writing ,updating , copying , moving and deleting files from java appln.
+
+Java file handling API's :
+1. Java.io
+2. nIO
+
+Q. Which API should be used for modern application?
+-> java.nIO because the operations are cleaner , faster, better performance, support large files,
+better error handling 
+
+Q. What are streams ?
+1. IOStreams:
+	FileInputStream.
+	FileObjectOutputStream
+	BufferReader
+
+what is IOStream: Reading data from file into stream and printing it via java program .
+A stream is simply channel through which data flows.
+
+Two types:
+Input stream : Reading data
+Output Stream: writing data
+
+Byte stream vs character stream
+
+1 Byte stream Works with bytes and used for images , videos, zip, pdf, audio.
+FileInputStream.
+FileOutputStream
+
+2. Character streams works with text used for txt , csv, xml, json,java files 
+File writer
+filereader
+BufferWriter
+BufferReader
+

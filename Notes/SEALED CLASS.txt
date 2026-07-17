@@ -1,0 +1,40 @@
+SEALED CLASS
+
+Before Java 17 if we create any base or parent class it will stay open for inheritance.
+If we want to restrict subclass creation for base class we should make that class as sealed , all the child classes can be :
+1. Sealed
+2. Final
+3. Non-Sealed
+
+example:
+
+SQLException- Sealed-----> Netweork Connection, DBConnection 
+
+now Network connection should be final 
+DBconnection should be non-sealed for further class using it.
+
+Q. Does sealed class improve performance ?
+-> Not directly but sealed class benefits include better type safety , easier maintainence , improved compiler analysis, better support for pattern matching.
+
+Q. Why was sealed classes introduced?
+->To give class designers control over which classes can extend or implement a time , creating a closed and well defined hierarchy.
+
+Q. Can a sealed class extend another class ?
+-> Yes, provided it follows the normal inheritance and super class allows it.
+
+-> We can have abstract class as sealed class, bcoz the base type is not intended to be instanciated directly .
+
+Applications of sealed class.
+1. Banking appln
+2. Payment systems .
+3. State Machines.
+4. Domain driven design.
+5.Compiler models
+6. Abstract syntax trees.(AST)
+7.API results.
+
+Q. Why do sealed classes work well with pattern mathing
+becoz compiler knows all permited subtypes.
+It can perform more checks and enable pattern matching in newer or latest java versions.
+
+

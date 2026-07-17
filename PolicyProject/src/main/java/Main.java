@@ -131,6 +131,8 @@ public class Main
 
         Customer customer = new Customer(customerId, customerName, phone);
 
+
+
         System.out.print("Policy Id : ");
         String policyId = sc.next();
 
