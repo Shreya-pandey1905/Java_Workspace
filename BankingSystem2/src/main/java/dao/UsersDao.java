@@ -1,0 +1,105 @@
+package dao;
+
+import config.DBConnection;
+import model.Users;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UsersDao {
+
+public static Users create(String name, String email, String password,
+                    long account_no, String ifsc, String branch)
+        throws SQLException {
+    String sql = "insert into users (name,email ,password,account_no,ifsc,branch) values(?,?,?,?,?,?)";
+    try(Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection .prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)
+    )
+
+    {
+        statement.setString(1,name);
+        statement.setString(2,email);
+        statement.setString(3,password);
+        statement.setLong(4,account_no);
+        statement.setString(5,ifsc);
+        statement.setString(6, branch);
+
+
+
+        statement.executeUpdate();
+        try (ResultSet keys = statement.getGeneratedKeys()){
+            keys.next();
+            Users customer = findByID(keys.getLong(1));
+            if (customer==null){
+                throw new SQLException("Not found user");
+            }
+            return customer;
+        }
+    }
+}
+
+    public static Users findByID(long id) throws SQLException{
+        String sql="select * from users where id=?";
+
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ){
+            statement.setLong(1,id);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next()? map(resultSet): null;
+            }
+        }
+    }
+
+    public  static  Users map(ResultSet resultSet) throws SQLException {
+    return new Users(resultSet.getInt("id"),
+            resultSet.getString("name"),
+                      resultSet.getString("email"),
+                    resultSet.getLong("account_no"),
+                    resultSet.getString("ifsc"),
+                    resultSet.getString("branch"),
+            resultSet.getString("role"),
+            resultSet.getDouble("balance")
+
+            );
+
+
+
+
+    }
+
+    public static Users findbyEmailAndPassword(String email, String pass) throws SQLException {
+        String sql="select * from users where email=? and password=?";
+
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ){
+            statement.setString(1,email);
+            statement.setString(2,pass);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next()? map(resultSet): null;
+            }
+        }
+
+    }
+
+    public static Users deposit(double balance, int id) throws SQLException {
+        String sql="update users set balance=balance+? where id=?";
+
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ){
+            statement.setDouble(1,balance);
+            statement.setInt(2,id);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next()? map(resultSet): null;
+            }
+        }
+    }
+
+}
+
+
+
