@@ -17,8 +17,7 @@ public class AuthService
         return UsersDao.findbyEmailAndPassword(email,PasswordHash.hash(password));
 
     }
-
-    public static Users deposit(double balance, int id) throws SQLException {
-        return UsersDao.deposit(balance,id);
+    public static Users deposit(double amount, int id) throws SQLException {
+        return UsersDao.deposit(amount,id);
     }
 }

@@ -85,19 +85,7 @@ public static Users create(String name, String email, String password,
 
     }
 
-    public static Users deposit(double balance, int id) throws SQLException {
-        String sql="update users set balance=balance+? where id=?";
 
-        try(Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)
-        ){
-            statement.setDouble(1,balance);
-            statement.setInt(2,id);
-            try(ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next()? map(resultSet): null;
-            }
-        }
-    }
 
 }
 

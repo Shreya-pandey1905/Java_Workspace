@@ -1,0 +1,5 @@
+INFO-- INFO STATEMENT
+
+WARN -- WARN statement
+INFO -- INFO statement
+ERROR -- ERROR statement

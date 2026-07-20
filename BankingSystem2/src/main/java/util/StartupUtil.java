@@ -1,6 +1,10 @@
 package util;
 
+import dao.TransactionsDao;
 import dao.UsersDao;
+import model.Status;
+import model.Transactions;
+import model.Type;
 import model.Users;
 import service.AuthService;
 
@@ -122,11 +126,25 @@ public class StartupUtil {
         return scanner.nextLine();
     }
 
-    private static void deposit(double amount){
-        Users users = AuthService.deposit(
-               Double.parseDouble(readLine("Balance "))
-        )
+    private static void deposit(Users user) throws SQLException {
 
+        double amount = Double.parseDouble(readLine("Enter amount : "));
+
+        Users updatedUser = AuthService.deposit(amount, user.getId());
+
+        Transactions transaction = new Transactions(
+                updatedUser.getId(),
+                Type.DEPOSIT,
+                amount,
+                updatedUser.getBalance(),
+                Status.SUCCESSFUL,
+                "Cash Deposit"
+        );
+
+        TransactionsDao.create(transaction);
+
+        System.out.println("Deposit Successful");
+        System.out.println("Current Balance : " + updatedUser.getBalance());
     }
 
 
