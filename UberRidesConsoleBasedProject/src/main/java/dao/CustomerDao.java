@@ -74,7 +74,7 @@ public class CustomerDao {
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                customers.add(map(resultSet));
+                    customers.add(map(resultSet));
             }
         }
         return customers;

@@ -64,10 +64,6 @@ public static Users create(String name, String email, String password,
             resultSet.getDouble("balance")
 
             );
-
-
-
-
     }
 
     public static Users findbyEmailAndPassword(String email, String pass) throws SQLException {

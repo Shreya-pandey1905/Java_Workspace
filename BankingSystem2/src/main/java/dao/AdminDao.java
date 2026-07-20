@@ -1,0 +1,94 @@
+package dao;
+
+import config.DBConnection;
+import model.Status;
+import model.Transactions;
+import model.Type;
+import model.Users;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class AdminDao {
+
+    public static Users login(String email, String password) throws SQLException {
+
+        String sql = "select * from users where email=? and password=? and role='ADMIN'";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                return resultSet.next() ? map(resultSet) : null;
+            }
+        }
+    }
+
+    private static Users map(ResultSet resultSet) throws SQLException {
+
+        return new Users(
+                resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("email"),
+                resultSet.getLong("account_no"),
+                resultSet.getString("ifsc"),
+                resultSet.getString("branch"),
+                resultSet.getString("role"),
+                resultSet.getDouble("balance")
+        );
+    }
+
+    public static List<Users> findAllUsers() throws SQLException {
+        String sql = "select * from users where role='USER'";
+
+        List<Users> users = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                users.add(map(resultSet));
+            }
+        }
+        return users;
+    }
+
+    public static List<Transactions> findAllTransactions() throws SQLException {
+
+        String sql = "select * from transactions";
+
+        List<Transactions> transactions = new ArrayList<>();
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+
+                Transactions transaction = new Transactions(
+                        resultSet.getInt("user_id"),
+                        Type.valueOf(resultSet.getString("type")),
+                        resultSet.getDouble("amount"),
+                        resultSet.getDouble("balance_after"),
+                        Status.valueOf(resultSet.getString("status")),
+                        resultSet.getString("reason")
+                );
+
+                transactions.add(transaction);
+            }
+        }
+
+        return transactions;
+    }
+
+
+
+
+
+}

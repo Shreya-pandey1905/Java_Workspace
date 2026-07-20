@@ -227,8 +227,7 @@ public class StartupUtil {
                 case 3 -> {
                     long rideId = readLong("Ride id: ");
                     System.out.println(rideService.acceptRide(rideId,driver)
-                    ? "Ride Accepted"
-                            : "Ride no longer available"
+                    ? "Ride Accepted" : "Ride no longer available"
                     );
                 }
                 case 4->{

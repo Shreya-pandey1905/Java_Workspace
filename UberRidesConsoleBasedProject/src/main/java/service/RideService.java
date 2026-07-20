@@ -22,6 +22,7 @@ public class RideService {
         return rideDao.create(customerId,pickup,drop,fare);
     }
 
+
     public boolean acceptRide(long rideId, Driver driver) throws SQLException {
         if (!driver.isAvailable()){
             throw new IllegalStateException("Driver must be available to ride");
