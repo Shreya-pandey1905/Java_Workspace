@@ -115,18 +115,24 @@ public class StartupUtil {
         return scanner.nextLine();
     }
 
-    private static Users deposit(Users user) throws SQLException {
+    private static void deposit(Users user) throws SQLException {
 
         double amount = readDouble("Enter amount: ");
 
-        Transactions transaction = new Transactions(user.getId(),Type.DEPOSIT,amount,user.getBalance(),
+        AuthService.deposit(amount, user.getId());
+
+        Transactions transaction = new Transactions(
+                user.getId(),
+                Type.DEPOSIT,
+                amount,
+                user.getBalance(),
                 Status.SUCCESSFUL,
-                "deposit"
+                "Deposit"
         );
 
         TransactionsDao.create(transaction);
 
-        return user;
+        System.out.println("Deposit Successful....");
     }
 
     private static int readInt(String label) {
@@ -139,30 +145,27 @@ public class StartupUtil {
         return Double.parseDouble(scanner.nextLine());
     }
 
-    private static Users withdraw(Users user) throws SQLException {
+    private static void withdraw(Users user) throws SQLException {
 
         double amount = readDouble("Enter amount : ");
 
-        Users updatedUser = AuthService.withdraw(amount, user.getId());
+        AuthService.withdraw(amount, user.getId());
 
-        if (updatedUser == null) {
-            System.out.println("Insufficient balance.");
-            return user;
-        }
+
 
         Transactions transaction = new Transactions(
-                updatedUser.getId(),
+                user.getId(),
                 Type.WITHDRAW,
                 amount,
-                updatedUser.getBalance(),
+                user.getBalance(),
                 Status.SUCCESSFUL,
                 "Withdraw"
         );
 
         TransactionsDao.create(transaction);
 
-        System.out.println("Your existing Balance : " + updatedUser.getBalance());
-        return updatedUser;
+        System.out.println("Your existing Balance : " + user.getBalance());
+        System.out.println("Withdrawl successfull...");
     }
 
     private static void viewProfile(Users user) {
@@ -178,8 +181,7 @@ public class StartupUtil {
     }
 
     private static void checkbalance(Users user) throws SQLException {
-        System.out.println("Balance :" + UsersDao.getBalance(user.getId()));
-        System.out.println(user.getId());
+        System.out.println("Balance :" + AuthService.checkBalance(user.getId()));
 
     }
 
@@ -244,38 +246,38 @@ public class StartupUtil {
 
     public static void UserMenu(Users users){
 
-        try {
-            while (true){
+                    try {
+                        while (true){
 
-                System.out.println("You are logged in into the account");
-                System.out.println("Press 1 for Deposit");
-                System.out.println("press 2 for Withdraw");
-                System.out.println("Press 3 for My profile");
-                System.out.println("Press 4 for CheckBalance");
-                System.out.println("Press 5 for Transaction History");
-                System.out.println("Press 0 for logout");
-                int choice = readInt("Choice: ");
+                            System.out.println("You are logged in into the account");
+                            System.out.println("Press 1 for Deposit");
+                            System.out.println("press 2 for Withdraw");
+                            System.out.println("Press 3 for My profile");
+                            System.out.println("Press 4 for CheckBalance");
+                            System.out.println("Press 5 for Transaction History");
+                            System.out.println("Press 0 for logout");
+                            int choice = readInt("Choice: ");
 
-                switch (choice){
-                    case 1->deposit(users.getId());
-                    case 2-> withdraw(users);
-                    case 3-> viewProfile(users);
-                    case 4 -> checkbalance(users);
-                    case 5 -> transactionHistory(users);
-                    case 0 -> {
-                        return;
+                            switch (choice){
+                                case 1->deposit(users);
+                                case 2-> withdraw(users);
+                                case 3-> viewProfile(users);
+                                case 4 -> checkbalance(users);
+                                case 5 -> transactionHistory(users);
+                                case 0 -> {
+                                    return;
+                                }
+                                default -> System.out.println("Invalid Option");
+
+
+
+                            }
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                    default -> System.out.println("Invalid Option");
-
-
 
                 }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
     public static void AdminMenu(Users users){
 

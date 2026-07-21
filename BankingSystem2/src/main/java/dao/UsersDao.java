@@ -17,7 +17,6 @@ public static Users create(String name, String email, String password,
     try(Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection .prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)
     )
-
     {
         statement.setString(1,name);
         statement.setString(2,email);
@@ -25,9 +24,6 @@ public static Users create(String name, String email, String password,
         statement.setLong(4,account_no);
         statement.setString(5,ifsc);
         statement.setString(6, branch);
-
-
-
         statement.executeUpdate();
         try (ResultSet keys = statement.getGeneratedKeys()){
             keys.next();
@@ -81,17 +77,22 @@ public static Users create(String name, String email, String password,
 
     }
 
-public static Users getBalance(int id) throws SQLException {
-    String sql= "select balance from users where id=?";
-    try(Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sql)
-    ){
-        statement.setInt(1,id);
-        try(ResultSet resultSet = statement.executeQuery()) {
-            return resultSet.next()? map(resultSet): null;
+    public static double getBalance(int id) throws SQLException {
+
+        String sql = "select balance from users where id = ?";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("balance");
+                }
+                return 0;
+            }
         }
     }
-}
+
+
 
 }
 

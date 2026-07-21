@@ -28,7 +28,7 @@ public class AuthService
 
     }
 
-    public static Users withdraw(double amount, int id) throws SQLException {
+    public static boolean withdraw(double amount, int id) throws SQLException {
         return TransactionsDao.withdraw(amount, id);
     }
 
@@ -47,6 +47,10 @@ public class AuthService
 
     public static List<Transactions> findTransactions() throws SQLException {
         return AdminDao.findAllTransactions();
+    }
+
+    public static double checkBalance (int id) throws SQLException {
+        return UsersDao.getBalance(id);
     }
 
 

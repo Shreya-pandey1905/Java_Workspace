@@ -1,5 +1,9 @@
 package model;
 
+import dao.TransactionsDao;
+
+import java.sql.SQLException;
+
 public class Users {
     public int getId() {
         return id;
@@ -14,7 +18,7 @@ public class Users {
     private final  String ifsc;
     private final String branch ;
     private final String role;
-    private final  double balance;
+    private double balance;
 
 
 
@@ -46,6 +50,10 @@ public class Users {
         return balance;
     }
 
+    public void setBalance(double balance) {
+        this.balance= balance;
+    }
+
 
 
     public Users(int id, String name, String email, long account_no, String ifsc, String branch, String role, double balance) {
@@ -59,5 +67,6 @@ public class Users {
         this.role = role;
         this.balance = balance;
     }
+
 
 }

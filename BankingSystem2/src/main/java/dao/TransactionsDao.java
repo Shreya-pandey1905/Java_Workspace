@@ -19,11 +19,10 @@ public class TransactionsDao {
 
     public static Transactions create(Transactions transaction) throws SQLException {
 
-        String sql = " INSERT INTO transactions(user_id,type,amount,balance_after,status,reason)VALUES(?,?,?,?,?,?)";
+        String sql = "insert into transactions(user_id,type,amount,balance_after,status,reason)values(?,?,?,?,?,?)";
 
-        try(Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql))
-        {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, transaction.getUser_id());
             statement.setString(2, transaction.getType().name());
@@ -42,27 +41,17 @@ public class TransactionsDao {
 
         String sql = "update users set balance = balance + ? where id=?";
 
-        try(Connection connection = DBConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql))
-        {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setDouble(1, amount);
             statement.setInt(2, id);
 
-            int rows = statement.executeUpdate();
-
-
-
+            statement.executeUpdate();
             return true;
         }
     }
 
-    public static Users withdraw(double amount, int id) throws SQLException {
-
-        Users user = findByID(id);
-
-        if (user.getBalance() < amount) {
-            return null;
-        }
+    public static boolean withdraw(double amount, int id) throws SQLException {
 
         String sql = "update users set balance = balance - ? where id=?";
 
@@ -74,7 +63,8 @@ public class TransactionsDao {
 
             statement.executeUpdate();
 
-            return findByID(id);
+            return true;
+
         }
     }
 
