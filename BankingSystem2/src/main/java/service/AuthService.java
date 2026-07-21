@@ -23,7 +23,7 @@ public class AuthService
 
     }
 
-    public static Users deposit(double amount, int id) throws SQLException {
+    public static boolean deposit(double amount, int id) throws SQLException {
         return TransactionsDao.deposit(amount,id);
 
     }

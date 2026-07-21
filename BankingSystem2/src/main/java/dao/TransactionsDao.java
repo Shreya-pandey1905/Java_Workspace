@@ -19,11 +19,7 @@ public class TransactionsDao {
 
     public static Transactions create(Transactions transaction) throws SQLException {
 
-        String sql = """
-            INSERT INTO transactions
-            (user_id,type,amount,balance_after,status,reason)
-            VALUES(?,?,?,?,?,?)
-            """;
+        String sql = " INSERT INTO transactions(user_id,type,amount,balance_after,status,reason)VALUES(?,?,?,?,?,?)";
 
         try(Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql))
@@ -42,7 +38,7 @@ public class TransactionsDao {
         }
     }
 
-    public static Users deposit(double amount, int id) throws SQLException {
+    public static boolean deposit(double amount, int id) throws SQLException {
 
         String sql = "update users set balance = balance + ? where id=?";
 
@@ -54,11 +50,9 @@ public class TransactionsDao {
 
             int rows = statement.executeUpdate();
 
-            if(rows == 0){
-                return null;
-            }
 
-            return findByID(id);
+
+            return true;
         }
     }
 

@@ -118,21 +118,15 @@ public class StartupUtil {
     private static Users deposit(Users user) throws SQLException {
 
         double amount = readDouble("Enter amount: ");
-        Users updatedUser = AuthService.deposit(amount, user.getId());
 
-        Transactions transaction = new Transactions(
-                updatedUser.getId(),
-                Type.DEPOSIT,
-                amount,
-                updatedUser.getBalance(),
+        Transactions transaction = new Transactions(user.getId(),Type.DEPOSIT,amount,user.getBalance(),
                 Status.SUCCESSFUL,
-                "Deposit"
+                "deposit"
         );
 
         TransactionsDao.create(transaction);
 
-        System.out.println("Your existing Balance : " + updatedUser.getBalance());
-        return updatedUser;
+        return user;
     }
 
     private static int readInt(String label) {
@@ -183,8 +177,9 @@ public class StartupUtil {
         System.out.println("Balance :" + user.getBalance());
     }
 
-    private static void checkbalance(Users user){
-        System.out.println("Balance :" + user.getBalance());
+    private static void checkbalance(Users user) throws SQLException {
+        System.out.println("Balance :" + UsersDao.getBalance(user.getId()));
+        System.out.println(user.getId());
 
     }
 
@@ -262,7 +257,7 @@ public class StartupUtil {
                 int choice = readInt("Choice: ");
 
                 switch (choice){
-                    case 1->deposit(users);
+                    case 1->deposit(users.getId());
                     case 2-> withdraw(users);
                     case 3-> viewProfile(users);
                     case 4 -> checkbalance(users);

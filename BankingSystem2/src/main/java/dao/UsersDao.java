@@ -81,7 +81,17 @@ public static Users create(String name, String email, String password,
 
     }
 
-
+public static Users getBalance(int id) throws SQLException {
+    String sql= "select balance from users where id=?";
+    try(Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)
+    ){
+        statement.setInt(1,id);
+        try(ResultSet resultSet = statement.executeQuery()) {
+            return resultSet.next()? map(resultSet): null;
+        }
+    }
+}
 
 }
 
