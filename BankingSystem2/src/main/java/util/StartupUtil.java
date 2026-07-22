@@ -128,6 +128,7 @@ public class StartupUtil {
                 user.getBalance(),
                 Status.SUCCESSFUL,
                 "Deposit"
+
         );
 
         TransactionsDao.create(transaction);
@@ -190,15 +191,9 @@ public class StartupUtil {
         List<Transactions> transactions =
                 AuthService.transactionHistory(user.getId());
 
-        if (transactions.isEmpty()) {
-            System.out.println("No transactions are done yet");
-            return;
-        }
-
         for (Transactions transaction : transactions) {
             System.out.println("Type : " + transaction.getType());
             System.out.println("Amount : " + transaction.getAmount());
-            System.out.println("balance : " + transaction.getBalance_after());
             System.out.println("Status : " + transaction.getStatus());
             System.out.println("Reason : " + transaction.getReason());
         }
