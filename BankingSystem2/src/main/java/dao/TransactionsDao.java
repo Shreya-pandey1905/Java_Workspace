@@ -90,6 +90,30 @@ public class TransactionsDao {
         return list;
     }
 
+    public static List<Transactions> miniStatement(int id, String type) throws SQLException {
+
+        List<Transactions> list = new ArrayList<>();
+
+        String sql = "select * from transactions where user_id=? and type = ? order by id desc limit 3";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+            statement.setString(2,type);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    list.add(map(resultSet));
+                }
+            }
+        }
+
+        return list;
+    }
+
+
     public static Transactions map(ResultSet resultSet) throws SQLException {
 
         return new Transactions(
@@ -101,5 +125,7 @@ public class TransactionsDao {
                 resultSet.getString("reason")
         );
     }
+
+
 
 }

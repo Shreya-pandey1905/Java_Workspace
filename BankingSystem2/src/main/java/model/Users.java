@@ -12,13 +12,19 @@ public class Users {
     private final int id;
     private final String name ;
     private final String email;
-//    private final String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    private String password;
 
     private final long account_no;
     private final  String ifsc;
     private final String branch ;
     private final String role;
     private double balance;
+    private boolean userLock;
 
 
 
@@ -49,6 +55,7 @@ public class Users {
     public double getBalance() {
         return balance;
     }
+    public boolean isUserLock() { return userLock; }
 
     public void setBalance(double balance) {
         this.balance= balance;

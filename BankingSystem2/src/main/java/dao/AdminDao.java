@@ -87,6 +87,64 @@ public class AdminDao {
         return transactions;
     }
 
+    public static List<Transactions> AllfailTransactions() throws SQLException {
+        String sql = "select * from transactions where status = 'FAILED'";
+        List<Transactions> transactions = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Transactions transaction = new Transactions(
+                        resultSet.getInt("userid"),
+                        Type.valueOf(resultSet.getString("type")),
+                        resultSet.getDouble("amount"),
+                        resultSet.getDouble("balanceafter"),
+                        Status.valueOf(resultSet.getString("status")),
+                        resultSet.getString("reason")
+                );
+                transactions.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public static List<Users> highestBalanceUser() throws SQLException {
+        String sql = "select * from user where role='user' AND balance = (select MAX(balance) from user)";
+        List<Users> users = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                users.add(map(resultSet));
+            }
+        }
+        return users;
+    }
+
+    public static List<Transactions> transactionBetweenDate(String start,String end) throws SQLException {
+        String sql = "select * from transactions where date BETWEEN ? AND ?";
+        List<Transactions> transactions = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery())
+        {
+            statement.setString(1,start);
+            statement.setString(2,end);
+            while (resultSet.next()) {
+                Transactions transaction = new Transactions(
+                        resultSet.getInt("userid;"),
+                        Type.valueOf(resultSet.getString("type")),
+                        resultSet.getDouble("amount"),
+                        resultSet.getDouble("balanceafter"),
+                        Status.valueOf(resultSet.getString("status")),
+                        resultSet.getString("reason")
+                );
+                transactions.add(transaction);
+            }
+
+        }
+        return transactions;
+    }
 
 
 

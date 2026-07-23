@@ -92,7 +92,55 @@ public static Users create(String name, String email, String password,
         }
     }
 
+    public static Users findByAccountNo(long accountNo) throws SQLException {
+        String sql = "select * from users where  account_no = ?";
 
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setLong(1, accountNo);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                return rs.next() ? map(rs) : null;
+            }
+        }
+    }
+
+
+    public static void lockUser(int id) throws SQLException {
+        String sql = "update users set user_lock=true where id=? ";
+        try (Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }
+    }
+
+    public static boolean changePassword(String newPass, int id) throws SQLException {
+    String sql = "update users set password=? where id=?";
+    try (Connection connection = DBConnection.getConnection();
+    PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, newPass);
+        statement.setInt(2, id);
+        return statement.executeUpdate()==1;
+    }
+    }
+
+    public static boolean verifyPassword(int id,String password) throws SQLException
+    {
+        String sql = "select password from users where id = ?";
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                String pwd = resultSet.getString("password");
+                return pwd.equals(password);
+            }
+            return false;
+        }
+    }
 
 }
 
