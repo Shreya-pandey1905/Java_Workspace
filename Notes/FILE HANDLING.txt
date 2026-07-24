@@ -29,8 +29,79 @@ FileInputStream.
 FileOutputStream
 
 2. Character streams works with text used for txt , csv, xml, json,java files 
+
 File writer
-filereader
+FileReader
 BufferWriter
 BufferReader
+
+
+private static final long serialVersionUId=1L 
+
+above thing acts as a version identifier for the serialize task, after serialization if we change any property in the serialized class , it might give an exception while deserialization , hence without a compatible serial version uid, deserialization may fail with InvalidClassException, bcoz the jvm detects that the class definition has been changed.
+
+# TRABSIENT KEYWORD
+Sometimes you dont want to serialize te sensitive fields so to hide the actual value while deserialization we use transient keyword.
+
+				Serialization vs JSON
+
+Serialization			|			JSON
+
+Java Specific			|			Language independent
+	
+Follows binary format 		|			Follows text format
+
+Faster for java to java communication	 |		Easier to read 
+
+Rarely used for REST APIS		 |		Standard for REST API
+
+
+# JAVA NIO
+
+It was introduced in java 4 version to overcome the limitation of io package.
+
+
+Java IO:
+1. Java IO reads one stream at a time
+2. Follows blocking IO Operations .
+3. stream based
+4. Slower for large appln.
+
+
+
+Java Nio:
+1. Can handle multiple channels simultaneously.
+2. NIO SUpports non blocking IO operations.
+3. Buffer and channel based
+4. Designed for high performance appln.
+
+Instead of streams NIO uses :
+1. Channels
+2. Buffer.
+3. Selector
+
+1. Channels:
+A channels is like a pipeline through which data flows .
+
+2. Buffer:
+Buffer is a temporary memory area where data is stored before your appln process it 
+
+3. Selector
+Allows one thread to monitor multiple channels.
+
+
+NIO2
+
+Java 7 significantly enhance nio with java.nio.filepackage.
+
+
+Usage of Nio advance
+Many enterprise technology rely on nio internally
+
+1. APACHE Kafka- For high throughput network communication.
+2. Apache tomcat - Uses nio connector for handling many HTTP connections 
+3. Netty- Asynchronous networking framework build on Nio .
+4. Spring web flux - For reactive applns with non-blocking IO .
+5. Elastic search - efficient file and network operations.
+
 
