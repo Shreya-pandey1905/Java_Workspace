@@ -128,8 +128,6 @@ public class StartupUtil {
         UserMenu(user);
     }
 
-
-
     private static void viewProfile(Users user) {
 
         System.out.println("Id :" + user.getId());
@@ -213,6 +211,7 @@ public class StartupUtil {
                 )
         );
     }
+
     private static void highestBalanceUser() throws SQLException {
         AuthService.highestBalanceUser().forEach(user ->
                 System.out.printf(
@@ -227,6 +226,7 @@ public class StartupUtil {
                 )
         );
     }
+
     private static void transactionBetweenDate() throws SQLException{
         AuthService.transactionBetweenDate(readLine("enter start date"),readLine("enter end date")).forEach(transaction ->
                 System.out.printf(
@@ -320,6 +320,7 @@ public class StartupUtil {
                 System.out.println("Press 6 for Transfer Money");
                 System.out.println("Press 7 for mini statement");
                 System.out.println("Press 8 for resetPassword");
+                System.out.println("Press 9 for ManageBeneficiaries");
 
 
                 System.out.println("Press 0 for logout");
@@ -334,6 +335,7 @@ public class StartupUtil {
                     case 6 -> transferredMoney(users);
                     case 7 -> miniSttatement(users);
                     case 8 -> resetpassword(users);
+                    case 9 -> manageBeneficiary(users);
                     case 0 -> {
                         return;
                     }
@@ -496,6 +498,47 @@ public class StartupUtil {
             }
 
         }
+
+    }
+
+        private static void manageBeneficiary(Users users) throws SQLException {
+            System.out.println("1. Add Beneficiary");
+            System.out.println("2. Update Beneficiary based on id");
+            System.out.println("3. Delete Beneficiary");
+            System.out.println("4. View Beneficiary");
+            int choice =readInt("Choice: ");
+            switch (choice){
+                case 1-> addBeneficiary(users);
+                case 2 -> updateBeneficiary(users);
+    //            case 3 -> deleteBeneficiary(beneficiary);
+    //            case 4 -> viewBeneficiary();
+                default -> System.out.println("Invalid Choice");
+            }
+        }
+
+    private static void addBeneficiary(Users users) throws SQLException {
+        String name = readLine("Name: ");
+        long acc = readLong("Account_no: ");
+        String ifsc = readLine("IFSC Code: ");
+        String nickname = readLine("Nickname: ");
+
+
+      AuthService.createBeneficiary(name,acc,ifsc,nickname,users.getId());
+
+        System.out.println("Bneficiary created successfully...");
+    }
+
+    private static void updateBeneficiary (Users users) throws SQLException {
+        int beneficiaryId= readInt("Enter beneficiary ID which is to be updated: ");
+        String name = readLine("Name: ");
+        long acc = readLong("Account_no: ");
+        String ifsc = readLine("IFSC Code: ");
+        String nickname = readLine("Nickname: ");
+
+        Beneficiary beneficiary= new Beneficiary(beneficiaryId,name,acc,ifsc,nickname,users.getId());
+
+        AuthService.updateBeneficiary(beneficiary);
+        System.out.println("Beneficiary updated successfully...");
 
     }
 }

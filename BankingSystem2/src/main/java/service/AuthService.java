@@ -1,9 +1,6 @@
 package service;
 
-import dao.AdminDao;
-import dao.TransactionsDao;
-import dao.TransferDao;
-import dao.UsersDao;
+import dao.*;
 import model.*;
 import util.PasswordHash;
 
@@ -85,13 +82,22 @@ public class AuthService
     public static List<Users> highestBalanceUser() throws SQLException {
         return AdminDao.highestBalanceUser();
     }
+
     public static List<Transactions> transactionBetweenDate(String start,String end) throws SQLException {
         return AdminDao.transactionBetweenDate(start,end);
     }
+
     public static List<Transactions> AllfailTransaction() throws SQLException {
         return AdminDao.AllfailTransactions();
     }
 
+    public static Beneficiary createBeneficiary(String name,long acc_no,String ifsc,String nickname,int user_id) throws SQLException {
+        return  BeneficiaryDao.create(name,acc_no,ifsc,nickname,user_id);
+    }
+
+    public static Beneficiary updateBeneficiary(Beneficiary beneficiary) throws SQLException {
+        return  BeneficiaryDao.updates(beneficiary);
+    }
 
 
 

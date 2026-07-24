@@ -1,9 +1,5 @@
 package model;
 
-import dao.TransactionsDao;
-
-import java.sql.SQLException;
-
 public class Users {
     public int getId() {
         return id;
@@ -12,6 +8,20 @@ public class Users {
     private final int id;
     private final String name ;
     private final String email;
+    private final long account_no;
+    private final  String ifsc;
+    private final String branch ;
+    private final String role;
+    private double balance;
+    private boolean userLock;
+
+    public int getAttempts() {
+        return attempts;
+    }
+
+    private int attempts;
+
+
 
     public String getPassword() {
         return password;
@@ -19,12 +29,7 @@ public class Users {
 
     private String password;
 
-    private final long account_no;
-    private final  String ifsc;
-    private final String branch ;
-    private final String role;
-    private double balance;
-    private boolean userLock;
+
 
 
 
@@ -55,6 +60,7 @@ public class Users {
     public double getBalance() {
         return balance;
     }
+
     public boolean isUserLock() { return userLock; }
 
     public void setBalance(double balance) {
@@ -63,7 +69,7 @@ public class Users {
 
 
 
-    public Users(int id, String name, String email, long account_no, String ifsc, String branch, String role, double balance) {
+    public Users(int id, String name, String email, long account_no, String ifsc, String branch, String role, double balance,boolean userLock, int attempts) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -73,6 +79,8 @@ public class Users {
         this.branch = branch;
         this.role = role;
         this.balance = balance;
+        this.userLock = userLock;
+        this.attempts=attempts;
     }
 
 

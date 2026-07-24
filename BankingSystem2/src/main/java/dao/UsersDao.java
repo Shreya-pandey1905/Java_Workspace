@@ -57,7 +57,9 @@ public static Users create(String name, String email, String password,
                     resultSet.getString("ifsc"),
                     resultSet.getString("branch"),
             resultSet.getString("role"),
-            resultSet.getDouble("balance")
+            resultSet.getDouble("balance"),
+            resultSet.getBoolean("user_lock"),
+            resultSet.getInt("attempts")
 
             );
     }
@@ -111,7 +113,32 @@ public static Users create(String name, String email, String password,
         String sql = "update users set user_lock=true where id=? ";
         try (Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, id);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
+
+    //UPDATE users
+    //SET failed_attempts = failed_attempts + 1
+    //WHERE id = ?;
+
+    public static void incrAttempts(int id, int attempts) throws SQLException {
+        String sql = "update users set attempts=attempts+1 where id=? ";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, attempts);
+
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        }
+    }
+
+
+    public static void resetAttempts(int id, int attempts) throws SQLException {
+        String sql = "update users set attempts=0 where id=? ";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
             statement.executeUpdate();
         }
     }

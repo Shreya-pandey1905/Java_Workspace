@@ -41,7 +41,9 @@ public class AdminDao {
                 resultSet.getString("ifsc"),
                 resultSet.getString("branch"),
                 resultSet.getString("role"),
-                resultSet.getDouble("balance")
+                resultSet.getDouble("balance"),
+                resultSet.getBoolean("user_lock"),
+                resultSet.getInt("attempts")
         );
     }
 
@@ -109,7 +111,7 @@ public class AdminDao {
     }
 
     public static List<Users> highestBalanceUser() throws SQLException {
-        String sql = "select * from users where role='user' AND balance = (select MAX(balance) from user)";
+        String sql = "select * from users where role='USER' AND balance = (select MAX(balance) from users)";
         List<Users> users = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -122,20 +124,22 @@ public class AdminDao {
     }
 
     public static List<Transactions> transactionBetweenDate(String start,String end) throws SQLException {
-        String sql = "select * from transactions where date BETWEEN ? AND ?";
+        String sql = "select * from transactions where created_at BETWEEN ? AND ?";
         List<Transactions> transactions = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery())
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, start);
+            statement.setString(2, end);
+
+           try (ResultSet resultSet = statement.executeQuery())
         {
-            statement.setString(1,start);
-            statement.setString(2,end);
+
             while (resultSet.next()) {
                 Transactions transaction = new Transactions(
-                        resultSet.getInt("userid;"),
+                        resultSet.getInt("user_id"),
                         Type.valueOf(resultSet.getString("type")),
                         resultSet.getDouble("amount"),
-                        resultSet.getDouble("balanceafter"),
+                        resultSet.getDouble("balance_after"),
                         Status.valueOf(resultSet.getString("status")),
                         resultSet.getString("reason")
                 );
@@ -143,7 +147,17 @@ public class AdminDao {
             }
 
         }
+           }
         return transactions;
+    }
+
+    public static void unlockUserr(int id) throws SQLException {
+        String sql = "update users set user_lock=false where id=? ";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }
     }
 
 
