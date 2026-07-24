@@ -1,3 +1,5 @@
+import org.example.DBConnection;
+
 import java.io.*;
 import java.sql.*;
 
@@ -5,7 +7,7 @@ public class csvToDatabase {
 
     static void main() throws IOException, SQLException {
 
-        String sql = "INSERT INTO products(id,name) VALUES(?,?)";
+        String sql = "insert into products (id,name) values (?,?)";
 
         try (
                 Connection connection = DBConnection.getConnection();
@@ -20,8 +22,8 @@ public class csvToDatabase {
 
                 String[] arr = line.split(",");
 
-                statement.setInt(1, arr[0]);
-                statement.setString(2, Integer.parseInt(arr[1]));
+                statement.setInt(1, Integer.parseInt(arr[0]));
+                statement.setString(2,arr[1]);
 
 
                 statement.executeUpdate();

@@ -128,68 +128,6 @@ public class StartupUtil {
         UserMenu(user);
     }
 
-<<<<<<< HEAD
-=======
-    private static String readLine(String label){
-        System.out.println(label);
-        return scanner.nextLine();
-    }
-
-    private static void deposit(Users user) throws SQLException {
-
-        double amount = readDouble("Enter amount: ");
-
-        AuthService.deposit(amount, user.getId());
-
-        Transactions transaction = new Transactions(
-                user.getId(),
-                Type.DEPOSIT,
-                amount,
-                user.getBalance(),
-                Status.SUCCESSFUL,
-                "Deposit"
-
-        );
-
-        TransactionsDao.create(transaction);
-
-        System.out.println("Deposit Successful....");
-    }
-
-    private static int readInt(String label) {
-        System.out.print(label);
-        return Integer.parseInt(scanner.nextLine());
-    }
-
-    private static double readDouble(String label) {
-        System.out.print(label);
-        return Double.parseDouble(scanner.nextLine());
-    }
-
-    private static void withdraw(Users user) throws SQLException {
-
-        double amount = readDouble("Enter amount : ");
-
-        AuthService.withdraw(amount, user.getId());
-
-
-
-        Transactions transaction = new Transactions(
-                user.getId(),
-                Type.WITHDRAW,
-                amount,
-                user.getBalance(),
-                Status.SUCCESSFUL,
-                "Withdraw"
-        );
-
-        TransactionsDao.create(transaction);
-
-        System.out.println("Your existing Balance : " + user.getBalance());
-        System.out.println("Withdrawl successfull...");
-    }
-
->>>>>>> e6a1effda462aa63e3ddc1dcf19ee01e135eae94
     private static void viewProfile(Users user) {
 
         System.out.println("Id :" + user.getId());
