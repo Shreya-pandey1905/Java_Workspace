@@ -128,6 +128,8 @@ public class StartupUtil {
         UserMenu(user);
     }
 
+
+
     private static void viewProfile(Users user) {
 
         System.out.println("Id :" + user.getId());
@@ -221,7 +223,7 @@ public class StartupUtil {
                         user.getAccount_no(),
                         user.getIfsc(),
                         user.getBranch(),
-                         user.getBalance()
+                        user.getBalance()
                 )
         );
     }
@@ -267,85 +269,85 @@ public class StartupUtil {
 
         if (amount>0){
             if (amount <= finalBalance) {
-               boolean isWithdraw= AuthService.withdraw(amount, user.getId());
-               if (isWithdraw){
-                   Users updatedUser = UsersDao.findByID(user.getId());
+                boolean isWithdraw= AuthService.withdraw(amount, user.getId());
+                if (isWithdraw){
+                    Users updatedUser = UsersDao.findByID(user.getId());
 
-                   Transactions transaction = new Transactions(
-                           user.getId(),
-                           Type.WITHDRAW,
-                           amount,
-                           updatedUser.getBalance(),
-                           Status.SUCCESSFUL,
-                           "Withdraw"
-                   );
-                   TransactionsDao.create(transaction);
-                   System.out.println("Withdrawl successfull...");
-                   System.out.println("Your existing Balance : " + updatedUser.getBalance());
+                    Transactions transaction = new Transactions(
+                            user.getId(),
+                            Type.WITHDRAW,
+                            amount,
+                            updatedUser.getBalance(),
+                            Status.SUCCESSFUL,
+                            "Withdraw"
+                    );
+                    TransactionsDao.create(transaction);
+                    System.out.println("Withdrawl successfull...");
+                    System.out.println("Your existing Balance : " + updatedUser.getBalance());
 
-               }else {
-                   Transactions transaction = new Transactions(
-                           user.getId(),
-                           Type.WITHDRAW,
-                           amount,
-                           user.getBalance(),
-                           Status.FAILED,
-                           "Withdrawal Failed"
-                   );
+                }else {
+                    Transactions transaction = new Transactions(
+                            user.getId(),
+                            Type.WITHDRAW,
+                            amount,
+                            user.getBalance(),
+                            Status.FAILED,
+                            "Withdrawal Failed"
+                    );
 
-                   TransactionsDao.create(transaction);
+                    TransactionsDao.create(transaction);
 
-               }
+                }
             }else {
                 System.out.println("Insufficient balance...");
             }
         }else {
             System.out.println("Enter valid amoutn");
         }
-       }
+    }
 
     public static void UserMenu(Users users){
 
-                    try {
-                        while (true){
+        try {
+            while (true){
 
-                            System.out.println("You are logged in into the account");
-                            System.out.println("Press 1 for Deposit");
-                            System.out.println("press 2 for Withdraw");
-                            System.out.println("Press 3 for My profile");
-                            System.out.println("Press 4 for CheckBalance");
-                            System.out.println("Press 5 for Transaction History");
-                            System.out.println("Press 6 for Transfer Money");
-                            System.out.println("Press 7 for mini statement");
-                            System.out.println("Press 8 for resetPassword");
-
-
-                            System.out.println("Press 0 for logout");
-                            int choice = readInt("Choice: ");
-
-                            switch (choice){
-                                case 1->deposit(users);
-                                case 2-> withdraw(users);
-                                case 3-> viewProfile(users);
-                                case 4 -> checkbalance(users);
-                                case 5 -> transactionHistory(users);
-                                case 6 -> transferredMoney(users);
-                                case 7 -> miniSttatement(users);
-                                case 8 -> resetpassword(users);
-                                case 0 -> {
-                                    return;
-                                }
-                                default -> System.out.println("Invalid Option");
+                System.out.println("You are logged in into the account");
+                System.out.println("Press 1 for Deposit");
+                System.out.println("press 2 for Withdraw");
+                System.out.println("Press 3 for My profile");
+                System.out.println("Press 4 for CheckBalance");
+                System.out.println("Press 5 for Transaction History");
+                System.out.println("Press 6 for Transfer Money");
+                System.out.println("Press 7 for mini statement");
+                System.out.println("Press 8 for resetPassword");
 
 
+                System.out.println("Press 0 for logout");
+                int choice = readInt("Choice: ");
 
-                            }
-                        }
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                switch (choice){
+                    case 1->deposit(users);
+                    case 2-> withdraw(users);
+                    case 3-> viewProfile(users);
+                    case 4 -> checkbalance(users);
+                    case 5 -> transactionHistory(users);
+                    case 6 -> transferredMoney(users);
+                    case 7 -> miniSttatement(users);
+                    case 8 -> resetpassword(users);
+                    case 0 -> {
+                        return;
                     }
+                    default -> System.out.println("Invalid Option");
+
+
 
                 }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public static void AdminMenu(Users users){
 
@@ -383,58 +385,58 @@ public class StartupUtil {
     }
 
     private static void transferredMoney(Users user) throws SQLException {
-            long senderAcc = readLong("Enter the account you want to transfer money from: ");
+        long senderAcc = readLong("Enter the account you want to transfer money from: ");
 
-            if (senderAcc != user.getAccount_no()) {
-                System.out.println("account not found!");
-                return;
-            }
+        if (senderAcc != user.getAccount_no()) {
+            System.out.println("account not found!");
+            return;
+        }
 
-            long receiverAcc = readLong("Enter the account you want to transfer money to: ");
+        long receiverAcc = readLong("Enter the account you want to transfer money to: ");
 
-            Users receiver = UsersDao.findByAccountNo(receiverAcc);
+        Users receiver = UsersDao.findByAccountNo(receiverAcc);
 
-            if (receiver == null) {
-                System.out.println("receiver account not found!");
-                return;
-            }
-            double amount = readDouble("Enter amount to transfer: ");
+        if (receiver == null) {
+            System.out.println("receiver account not found!");
+            return;
+        }
+        double amount = readDouble("Enter amount to transfer: ");
 
-            if (amount> 0) {
-               if (amount <= user.getBalance()) {
+        if (amount> 0) {
+            if (amount <= user.getBalance()) {
 
-                 AuthService.withdraw(amount, user.getId());
-                   AuthService.deposit(amount, receiver.getId());
-                   AuthService.createTransfer(senderAcc, receiverAcc, Status.TRANSFERRED);
-                   System.out.println("Transfer Successful.");
+                AuthService.withdraw(amount, user.getId());
+                AuthService.deposit(amount, receiver.getId());
+                AuthService.createTransfer(senderAcc, receiverAcc, Status.TRANSFERRED);
+                System.out.println("Transfer Successful.");
 
-                   Transactions senderTransaction = new Transactions(user.getId(),Type.WITHDRAW,
-                           amount,
-                           user.getBalance() - amount,
-                           Status.SUCCESSFUL,
-                           "Transferred to account: " + receiverAcc
-                   );
+                Transactions senderTransaction = new Transactions(user.getId(),Type.WITHDRAW,
+                        amount,
+                        user.getBalance() - amount,
+                        Status.SUCCESSFUL,
+                        "Transferred to account: " + receiverAcc
+                );
 
-                   TransactionsDao.create(senderTransaction);
+                TransactionsDao.create(senderTransaction);
 
-                   Transactions receiverTransaction = new Transactions(
-                           receiver.getId(),
-                           Type.DEPOSIT,
-                           amount,
-                           receiver.getBalance() + amount,
-                           Status.SUCCESSFUL,
-                           "Received from accont :" + senderAcc
-                   );
+                Transactions receiverTransaction = new Transactions(
+                        receiver.getId(),
+                        Type.DEPOSIT,
+                        amount,
+                        receiver.getBalance() + amount,
+                        Status.SUCCESSFUL,
+                        "Received from accont :" + senderAcc
+                );
 
-                   TransactionsDao.create(receiverTransaction);
+                TransactionsDao.create(receiverTransaction);
 
 
-               }else {
-                   System.out.println("Insufficient balance...");
-               }
             }else {
-                System.out.print("Invalid amount");
+                System.out.println("Insufficient balance...");
             }
+        }else {
+            System.out.print("Invalid amount");
+        }
 
 
     }
@@ -474,16 +476,16 @@ public class StartupUtil {
 
             for (char ch : newPassword.toCharArray()) {
 
-             if (Character.isUpperCase(ch)){
-               isUpper = true;
-             }
+                if (Character.isUpperCase(ch)){
+                    isUpper = true;
+                }
                 if (Character.isLowerCase(ch)) {
                     islower = true;
                 }
                 if (Character.isDigit(ch)){
                     isDigit=true;
                 }
-                }
+            }
 
             if (newPassword.length() >= 8 && isUpper && islower && isDigit) {
                 AuthService.resetPassword(user.getId(), newPassword);
@@ -493,11 +495,10 @@ public class StartupUtil {
                 System.out.println("password validation failed.");
             }
 
-            }
-
         }
-    }
 
+    }
+}
 
 
 

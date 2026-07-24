@@ -12,7 +12,6 @@ public class ATM {
             }
         },"ATM");
 
-
         Thread thread1 = new Thread(()->{
 
             try {

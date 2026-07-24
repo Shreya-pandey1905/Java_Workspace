@@ -109,7 +109,7 @@ public class AdminDao {
     }
 
     public static List<Users> highestBalanceUser() throws SQLException {
-        String sql = "select * from user where role='user' AND balance = (select MAX(balance) from user)";
+        String sql = "select * from users where role='user' AND balance = (select MAX(balance) from user)";
         List<Users> users = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);

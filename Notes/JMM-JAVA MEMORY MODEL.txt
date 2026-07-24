@@ -1,0 +1,64 @@
+JMM-JAVA MEMORY MODEL
+It defines how threads interact with the memory and when changes made by one thread becomes visible to other threads, it specifies:
+
+1. Memory visibility
+2. Altering of Operations.
+3. Synchronisation rules 
+
+Volatile
+What volatile guarantees?
+1. Memory visibility
+2. Happens  before relationship.
+3. Difference between synchronized and volatile
+Volatile-
+ Visibiity
+faster
+no atomicity
+best for flags 
+No lock is involved
+
+Synchronised- 
+visibility plus mutual exclusion
+uses lock
+slow
+atomicity execution inside synchronized block.
+best for shared mutable state
+
+Real World usage of volatile
+1.Shutdown flag
+2.Configuration reload- Multiple threads immediately see the updated configuration
+3.Feature toggle- Operation team changes it , every team immediately sees latest values 
+4. Cache refresh indicator.
+
+REENTERANT lock
+The tread that already owns the lock can acquire it again without getting it block.
+REENTERANT lock is a class from java.util.concurrent.locks which is used to provide mutual exclusion(only one thread can execute a critical section at a time)
+
+In REENTERANT LOCK - It will try till the resource is free
+
+Using synchronized we can not perform below actions .
+Try acquiring the lock for 2 secs. 
+We cannot interrupt waiting thread
+We cannot check who or which thread owns the lock.
+Fairness.
+Checking multiple conditions.
+
+Deadlock
+A deadlock occurs when two or more threads waits forever for each oother to release resources. due to which none of the threads can continue.
+Four conditions require for a deadlock
+1. Mutual exclusion.
+2. Hold and wait- Threads which already owns a resource and waiting for another.
+3. No preeumption- Resources cannot be forcibly taken away.
+4. Circular wait
+
+Q. How to prevent deadlock?
+1. Acquire locks in same order.
+2. Keep locks for short time.
+3. Use reenentrant lock with try lock
+
+Deadlock Detection:
+1. Visual VM- shows thread states ,  deadlock threads and CPU usage 
+2. Jstack- It shows thread names, locks held and waiting locks.
+3. Java Flight Recorder(JFR)- it can detect deadlocks, thread blocking, CPU usage, lock contention
+
+

@@ -12,24 +12,24 @@ import java.sql.SQLException;
 public class TransferDao {
 
     public static Transfer create(long sender_acc, long receiver_acc, Status status) throws SQLException {
-            String sql = "insert into transferDetails(sender_account, receiver_account,status) values(?,?,?)";
+        String sql = "insert into transferDetails(sender_account, receiver_account,status) values(?,?,?)";
 
-            try (Connection conn = DBConnection.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)
-            ){
-                pstmt.setLong(1, sender_acc);
-                pstmt.setLong(2, receiver_acc);
-                pstmt.setString(3, status.name());
-                pstmt.executeUpdate();
-                try (ResultSet keys = pstmt.getGeneratedKeys()){
-                 keys.next();
-                 Transfer transfer = findById(keys.getInt(1));
-                 if (transfer == null){
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS)
+        ){
+            pstmt.setLong(1, sender_acc);
+            pstmt.setLong(2, receiver_acc);
+            pstmt.setString(3, status.name());
+            pstmt.executeUpdate();
+            try (ResultSet keys = pstmt.getGeneratedKeys()){
+                keys.next();
+                Transfer transfer = findById(keys.getInt(1));
+                if (transfer == null){
                     throw new SQLException("Transfer with id " + keys.getInt(1) + " not found");
-                 }
-                 return transfer;
                 }
+                return transfer;
             }
+        }
     }
 
     public static Transfer findById(long id) throws SQLException {
@@ -40,7 +40,7 @@ public class TransferDao {
         ){
             pstmt.setLong(1, id);
             try (ResultSet rs = pstmt.executeQuery()){
-              return rs.next()?map(rs):null;
+                return rs.next()?map(rs):null;
             }
         }
 
@@ -52,7 +52,7 @@ public class TransferDao {
                 rs.getLong("sender_account"),
                 rs.getLong("receiver_account"),
                 Status.valueOf( rs.getString("status"))
-                );
+        );
     }
 
 
