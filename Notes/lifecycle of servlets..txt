@@ -1,0 +1,6 @@
+lifecycle of servlets.
+
+create objects.
+init
+service()- providing resp for your req.
+destroy()

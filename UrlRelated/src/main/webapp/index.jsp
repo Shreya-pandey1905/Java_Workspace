@@ -20,15 +20,17 @@
             <!-- place navbar here -->
         </header>
         <main>
-       <div class="container ">
-             <form action="login" method="POST">
+          <div
+            class="container"
+          >
+             <form action="urll" >
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Username</label>
+                    <label for="" class="form-label">Search</label>
                     <input
                         type="text"
                         class="form-control"
-                        name="uname"
+                        name="searchUrl"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -36,16 +38,6 @@
 
                 </div>
 
-                <div class="mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input
-                        type="password"
-                        class="form-control"
-                        name="pwd"
-                        id=""
-                        placeholder=""
-                    />
-                </div>
 
                 <button
                     type="submit"

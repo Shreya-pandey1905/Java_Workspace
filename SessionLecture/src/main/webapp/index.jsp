@@ -21,14 +21,14 @@
         </header>
         <main>
        <div class="container ">
-             <form action="login" method="POST">
+             <form action="servlet1">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Username</label>
+                    <label for="" class="form-label">Name</label>
                     <input
                         type="text"
                         class="form-control"
-                        name="uname"
+                        name="name"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -36,16 +36,7 @@
 
                 </div>
 
-                <div class="mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input
-                        type="password"
-                        class="form-control"
-                        name="pwd"
-                        id=""
-                        placeholder=""
-                    />
-                </div>
+
 
                 <button
                     type="submit"

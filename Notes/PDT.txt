@@ -1,0 +1,23 @@
+PDT 
+orders
+
+instead of objects , store it in database .
+
+
+// When you want something to be returned use Callable which has call method.
+// Runnable is for the task which should be perform but not expecting anything in retunn and it contains run method.
+//callable store the returned data in future
+// type of both runnable and callable is anything that is generic.
+// submit will take both Callable and Runnable.
+// in future you cant perform chain of operations like completable future.
+//Completeable future is to perform chain of actions/ operations on data,and it has runAsync.
+//runasync and supplyasync will not block and will return and getAsync will block the coming data .
+
+//#  thread pool =   (3,2,60)
+//             mean (core threads,max thread,time(second))
+//             core thread(3) = Core threads are already there.
+//             max thread(2)= Max threads are used when all the threads are busy.
+//             time(60 second) = Means the max threads that came will wait for 60 whether any other task is there or   not
+
+
+// newWorkStealingPool take daemon threads
