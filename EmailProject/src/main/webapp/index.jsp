@@ -20,16 +20,40 @@
             <!-- place navbar here -->
         </header>
         <main>
-          <h1 text-center>Login Page</h1>
-       <div class="container border p-4 mt-5  ">
-             <form action="login" method="POST">
+        <h1>Email sender</h1>
+       <div class="container border rounded shadow-sm p-4 mt-5 ">
+             <form action="sendmail" method="post">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Username</label>
+                    <label for="" class="form-label">To</label>
                     <input
                         type="text"
                         class="form-control"
-                        name="uname"
+                        name="to"
+                        value=""
+                        id=""
+                        aria-describedby="helpId"
+                        placeholder=""
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Subject</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="subject"
+                        id=""
+                        aria-describedby="helpId"
+                        placeholder=""
+                    />
+
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Message</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="message"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -37,22 +61,17 @@
 
                 </div>
 
-                <div class="mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input
-                        type="password"
-                        class="form-control"
-                        name="pwd"
-                        id=""
-                        placeholder=""
-                    />
-                </div>
+
+
+
+
+
 
                 <button
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Submit
+                    Send Main
                 </button>
 
 

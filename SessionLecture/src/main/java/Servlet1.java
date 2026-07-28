@@ -23,7 +23,18 @@ public class Servlet1 extends HttpServlet {
                 "<h1><a href='servlet2?" + name + "'>Servlet2</a></h1>");
         Cookie cookie= new Cookie("user",name);
 
-        resp.addCookie(cookie);
+//        out.println("<h1>Welcome " + name + "</h1>" +
+//                "<h1><a href='servlet2?" + name + "'>Servlet2</a></h1>");
+resp.setContentType("Text/html");
+        out.println("<h1>Welcome "+ name +" </h1><form action='servlet2' method='get'><input type='hidden' name='name' value="+name+" />" +
+                "<button type='submit'>Submit</button>" +
+                "</form>");
+
+
+
+//        Cookie cookie= new Cookie("user",name);
+
+//        resp.addCookie(cookie);
 
     }
 }

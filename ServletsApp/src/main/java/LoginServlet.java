@@ -4,6 +4,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,7 +34,9 @@ public class LoginServlet extends HttpServlet {
                                 "</body>" +
                                 "</html"
                 );
-                req.setAttribute("name_key",namee);
+                HttpSession httpSession = req.getSession();
+                httpSession.setAttribute("name_key2",namee);
+//                req.setAttribute("name_key",namee);
                 RequestDispatcher rd1= req.getRequestDispatcher("profile.jsp");
                 rd1.forward(req,resp);
             }else {

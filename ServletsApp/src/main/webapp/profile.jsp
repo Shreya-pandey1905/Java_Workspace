@@ -37,6 +37,15 @@
                                      <span class="visually-hidden">(current)</span></a>
                              </li>
 
+                                          <a
+                                             name=""
+                                             id=""
+                                             class="btn btn-danger"
+                                             href="logout"
+                                             role="button"
+                                             >Logout</a
+                                          >
+
                          </ul>
 
                      </div>
@@ -47,9 +56,11 @@
        <div class="container ">
 
         <%
-        String name=(String) request.getAttribute("name_key");
+        String name=(String) session.getAttribute("name_key2");
           %>
           <%= "<h1>Welcome to your Dashboard "+name+"</h1>"  %>
+
+
           </div>
 
         </main>
