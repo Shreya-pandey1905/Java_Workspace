@@ -50,7 +50,7 @@ public class BeneficiaryDao
     }
     public static Beneficiary updates(Beneficiary beneficiary) throws SQLException {
 
-        String sql = "update beneficiary set name=?,acc_no=?,ifsc=?,nickname=? where id=?";
+        String sql = "update beneficiary set name=?,acc_no=?,ifsc=?,nickname=? where id =? and user_id=? ";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -60,32 +60,64 @@ public class BeneficiaryDao
             statement.setString(3,beneficiary.ifsc());
             statement.setString(4,beneficiary.nickname());
             statement.setInt(5,beneficiary.id());
+            statement.setInt(6,beneficiary.user_id());
 
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
 
-            return beneficiary;
+            if (rows > 0) {
+                return beneficiary;
+            }
+//            }else {
+//                System.out.println("beneficiary not found");
+//            }
+
+            return null;
+
+
         }
     }
 
-    public static void delete(int id) throws SQLException {
-        String sql = "delete from beneficiary where id=?";
-        try (Connection connection = DBConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1,id);
-            statement.executeUpdate();
-        }
-    }
+    public static Beneficiary findById(int id, int userId) throws SQLException {
 
-    public static List<Beneficiary> view(int id) throws SQLException {
-
-        List<Beneficiary> list = new ArrayList<>();
-
-        String sql = "select * from beneficiary where id=?";
+        String sql = "select * from beneficiary where id=? and user_id=?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, id);
+            statement.setInt(2, userId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    return map(resultSet);
+                }
+
+                return null;
+            }
+        }
+    }
+
+    public static void delete(int id,int user_id) throws SQLException {
+        String sql = "delete from beneficiary where id=? and user_id=?";
+        try (Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1,id);
+            statement.setInt(2,user_id);
+            statement.executeUpdate();
+        }
+    }
+
+    public static List<Beneficiary> view(int userid) throws SQLException {
+
+        List<Beneficiary> list = new ArrayList<>();
+
+        String sql = "select * from beneficiary where user_id=?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, userid);
 
             try (ResultSet resultSet = statement.executeQuery()) {
 
@@ -96,6 +128,23 @@ public class BeneficiaryDao
         }
 
         return list;
+    }
+
+    public static Beneficiary findByAccountNo(long accountNo, int userId) throws SQLException {
+
+        String sql = "select * from beneficiary where user_id = ? AND acc_no = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, userId);
+            statement.setLong(2, accountNo);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                return resultSet.next() ? map(resultSet) : null;
+            }
+        }
     }
 
     public static Beneficiary map(ResultSet resultSet) throws SQLException {

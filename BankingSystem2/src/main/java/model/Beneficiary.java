@@ -14,7 +14,7 @@ public class Beneficiary {
     }
 
     public Beneficiary(int id,String name, long account_no, String ifsc, String nickname,int user_id) {
-
+this.id=id;
         this.name = name;
         this.account_no = account_no;
         this.ifsc = ifsc;

@@ -14,14 +14,12 @@ public class Users {
     private final String role;
     private double balance;
     private boolean userLock;
+    private int attempts;
+
 
     public int getAttempts() {
         return attempts;
     }
-
-    private int attempts;
-
-
 
     public String getPassword() {
         return password;

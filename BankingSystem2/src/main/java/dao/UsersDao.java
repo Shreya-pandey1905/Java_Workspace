@@ -65,7 +65,7 @@ public static Users create(String name, String email, String password,
     }
 
     public static Users findbyEmailAndPassword(String email, String pass) throws SQLException {
-        String sql="select * from users where email=? and password=?";
+        String sql="select * from users where email=? and password=? and role='USER'";
 
         try(Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
@@ -77,6 +77,21 @@ public static Users create(String name, String email, String password,
             }
         }
 
+    }
+    public static Users findByEmail(String email) throws SQLException {
+
+        String sql = "select * from users where email = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, email);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                return resultSet.next() ? map(resultSet) : null;
+            }
+        }
     }
 
     public static double getBalance(int id) throws SQLException {
@@ -93,7 +108,6 @@ public static Users create(String name, String email, String password,
             }
         }
     }
-
     public static Users findByAccountNo(long accountNo) throws SQLException {
         String sql = "select * from users where  account_no = ?";
 
@@ -117,24 +131,16 @@ public static Users create(String name, String email, String password,
             statement.executeUpdate();
         }
     }
-
-    //UPDATE users
-    //SET failed_attempts = failed_attempts + 1
-    //WHERE id = ?;
-
-    public static void incrAttempts(int id, int attempts) throws SQLException {
+    public static void incrAttempts(int id) throws SQLException {
         String sql = "update users set attempts=attempts+1 where id=? ";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, attempts);
+            statement.setInt(1, id);
 
-            statement.setInt(2, id);
             statement.executeUpdate();
         }
     }
-
-
-    public static void resetAttempts(int id, int attempts) throws SQLException {
+    public static void resetAttempts(int id) throws SQLException {
         String sql = "update users set attempts=0 where id=? ";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -152,7 +158,6 @@ public static Users create(String name, String email, String password,
         return statement.executeUpdate()==1;
     }
     }
-
     public static boolean verifyPassword(int id,String password) throws SQLException
     {
         String sql = "select password from users where id = ?";

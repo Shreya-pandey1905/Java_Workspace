@@ -1,10 +1,7 @@
 package dao;
 
 import config.DBConnection;
-import model.Status;
-import model.Transactions;
-import model.Type;
-import model.Users;
+import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -158,6 +155,35 @@ public class AdminDao {
             statement.setLong(1, id);
             statement.executeUpdate();
         }
+    }
+
+    public static List<AuditLogs> viewAudits() throws SQLException {
+
+        List<AuditLogs> list = new ArrayList<>();
+
+        String sql = "select * from audit_logs";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    AuditLogs auditLogs = new AuditLogs(
+                            resultSet.getInt("id"),
+                            resultSet.getString("email"),
+                            resultSet.getString("action"),
+                            resultSet.getString("description")
+
+                    );
+
+                    list.add(auditLogs);
+                }
+            }
+        }
+
+        return list;
     }
 
 
