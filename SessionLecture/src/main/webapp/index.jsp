@@ -20,7 +20,7 @@
             <!-- place navbar here -->
         </header>
         <main>
-       <div class="container ">
+       <div class="container border rounded shadow-sm p-4 mt-5 width "style="width: 60%;>
              <form action="servlet1">
 
                 <div class="mb-3">

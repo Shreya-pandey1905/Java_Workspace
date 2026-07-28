@@ -16,9 +16,11 @@ public class Servlet1 extends HttpServlet {
         String name= req.getParameter("name");
 
         PrintWriter out = resp.getWriter();
-        out.println("<h1>Welcome " +name+ "</h1>" +
-                "<h1><a href='servlet2'>Servlet2</a></h1>"
-                );
+//        out.println("<h1>Welcome " +name+ "</h1>" +
+//                "<h1><a href='servlet2?"+name+">Servlet2</a></h1>"
+//                );
+        out.println("<h1>Welcome " + name + "</h1>" +
+                "<h1><a href='servlet2?" + name + "'>Servlet2</a></h1>");
         Cookie cookie= new Cookie("user",name);
 
         resp.addCookie(cookie);
