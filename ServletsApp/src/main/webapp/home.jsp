@@ -17,13 +17,14 @@
 
     <body>
        <main>
-       <div class="container ">
+    <div class="container border rounded shadow-sm p-4 mt-5 width ">
 
 
                 <%
-                String name=(String) request.getAttribute("name_key");
+                String name=(String) session.getAttribute("name_key2");
                   %>
                   <%= "<h1>Welcome to Home Page "+name+"</h1>"  %>
+                  <a href="profile.jsp">Go to Profile</a>
                   </div>
           </div>
 

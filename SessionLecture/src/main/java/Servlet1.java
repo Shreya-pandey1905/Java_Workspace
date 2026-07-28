@@ -16,12 +16,17 @@ public class Servlet1 extends HttpServlet {
         String name= req.getParameter("name");
 
         PrintWriter out = resp.getWriter();
-        out.println("<h1>Welcome " +name+ "</h1>" +
-                "<h1><a href='servlet2'>Servlet2</a></h1>"
-                );
-        Cookie cookie= new Cookie("user",name);
+//        out.println("<h1>Welcome " + name + "</h1>" +
+//                "<h1><a href='servlet2?" + name + "'>Servlet2</a></h1>");
+resp.setContentType("Text/html");
+        out.println("<h1>Welcome "+ name +" </h1><form action='servlet2' method='get'><input type='hidden' name='name' value="+name+" />" +
+                "<button type='submit'>Submit</button>" +
+                "</form>");
 
-        resp.addCookie(cookie);
+
+//        Cookie cookie= new Cookie("user",name);
+
+//        resp.addCookie(cookie);
 
     }
 }
