@@ -1,0 +1,15 @@
+deployment descripter -  it is basically xml file which contain configurations of deployment (web.xml). so now annotation is
+
+for entire appln single context object is created which is globally used. 
+
+servlet context is when you want to set properties which will be available globally for the entire appln 
+session  
+
+servlet config - it store the property which is accessible only by one resource , for example , 
+
+
+JSTL
+EL
+FILTER
+SERVLET CONTEXT VS SERVLET CONFIG
+TAGS IN JSP
