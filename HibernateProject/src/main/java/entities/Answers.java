@@ -10,7 +10,7 @@ public class Answers {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     int id;
-    @OneToOne
+    @OneToOne(mappedBy = "answer")
     String answers;
     public int getId() {
         return id;
