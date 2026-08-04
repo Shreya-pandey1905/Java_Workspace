@@ -1,16 +1,20 @@
-package entities;
+package org.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Answers {
-    public Answers() {
+public class AnsManyToOne {
+    public AnsManyToOne() {
     }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     int id;
-    @OneToOne(mappedBy = "answer")
+
+
+    @ManyToOne
+    QnsOneToMany qnsOneToMany ;
+
     String answers;
     public int getId() {
         return id;
@@ -28,6 +32,13 @@ public class Answers {
         this.answers = answers;
     }
 
+    public QnsOneToMany getQnsOneToMany() {
+        return qnsOneToMany;
+    }
+
+    public void setQnsOneToMany(QnsOneToMany qnsOneToMany) {
+        this.qnsOneToMany = qnsOneToMany;
+    }
 
 
 }

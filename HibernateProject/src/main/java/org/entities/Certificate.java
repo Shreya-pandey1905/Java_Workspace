@@ -1,4 +1,4 @@
-package entities;
+package org.entities;
 
 import jakarta.persistence.Embeddable;
 
@@ -19,19 +19,11 @@ public class Certificate {
 
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
+       public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
+     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 

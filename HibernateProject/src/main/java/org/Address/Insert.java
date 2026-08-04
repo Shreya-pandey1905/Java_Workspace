@@ -1,6 +1,6 @@
 package org.Address;
 
-import entities.Address;
+import org.entities.Address;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;

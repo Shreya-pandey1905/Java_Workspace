@@ -1,7 +1,7 @@
 package org.Student;
 
 
-import entities.Student;
+import org.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
