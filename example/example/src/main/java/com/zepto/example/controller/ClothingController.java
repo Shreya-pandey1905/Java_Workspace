@@ -15,6 +15,7 @@ public class ClothingController {
     @Autowired
     private ClothingService clothingService;
 
+
     @PostMapping("/addClothing")
     public void addClothing(@RequestBody Clothing clothing){
         clothingService.add(clothing);
@@ -26,13 +27,18 @@ public class ClothingController {
     }
 
     @GetMapping("/getById/{id}")
-    public void getClothing(@PathVariable int id){
-        clothingService.get(id);
+    public Clothing getClothing(@PathVariable int id){
+        return clothingService.get(id);
     }
 
    @GetMapping("/getAll")
    public List<Clothing> getAllClothing(){
         return clothingService.getAll();
+    }
+
+    @GetMapping("/getByName/{name}")
+    public Clothing getName(@PathVariable String name){
+      return clothingService.getName(name);
     }
 
     @DeleteMapping("/deleteById/{id}")
@@ -45,9 +51,17 @@ public class ClothingController {
         clothingService.deleteAll();
     }
 
-    @PutMapping("updateClothingById/{id}")
+    @PatchMapping("updateClothingById/{id}")
         public void update(@PathVariable int id, @RequestBody Clothing clothing){
             clothingService.update(id, clothing);
 
         }
+
+    @GetMapping("getDetailsUsingRP")
+    public Clothing getNameByRp(@RequestParam String name,@RequestParam(required = false) Integer id){
+        return clothingService.getName(name);
+    }
+
+
+
 }

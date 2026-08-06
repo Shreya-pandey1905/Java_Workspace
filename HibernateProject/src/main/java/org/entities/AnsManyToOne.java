@@ -14,8 +14,8 @@ public class AnsManyToOne {
 
     @ManyToOne
     QnsOneToMany qnsOneToMany ;
-
     String answers;
+
     public int getId() {
         return id;
     }

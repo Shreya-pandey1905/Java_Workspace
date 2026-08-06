@@ -1,5 +1,6 @@
 package com.zepto.example.service;
 import com.zepto.example.entities.Clothing;
+import com.zepto.example.entities.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zepto.example.repository.ClothingRep;
@@ -44,6 +45,10 @@ public class ClothingService {
         clothing1.setDiscount(clothing.getDiscount());
         clothing1.setPrice(clothing.getPrice());
         clothingRep.save(clothing1);
+    }
+
+    public Clothing getName(String name){
+        return clothingRep.findByItemName(name);
     }
 }
 
