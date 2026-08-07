@@ -16,8 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserAuthController {
 
-    @Autowired
-    UserServiceImpl userService;
+        @Autowired
+        UserServiceImpl userService;
 
     @GetMapping("/register")
     public String userRegister( Model model){

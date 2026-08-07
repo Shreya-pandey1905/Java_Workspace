@@ -16,7 +16,7 @@ public class MailSenderServlet extends HttpServlet {
         String message= req.getParameter("message");
         try {
             Operation.sendMail(to, subject,message);
-            resp.getWriter().println("Mail sen  t successfully");
+            resp.getWriter().println("Mail sent successfully");
         }catch (Exception e){
             e.printStackTrace();
             resp.getWriter().println("Fail to send message");
