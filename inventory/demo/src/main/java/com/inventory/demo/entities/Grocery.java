@@ -17,7 +17,7 @@ public class Grocery {
     private String productName;
     private String category;
     private double price;
-    private int quality;
+    private int quantity;
     private double discount;
 
 }

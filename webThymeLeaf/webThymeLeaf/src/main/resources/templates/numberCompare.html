@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<span th:text="${num1}"></span>-->
+<!--<span th:text="${num2}"></span>-->
+
+<p th:if="${num1>num2}">
+<span th:text="${num1}+' is greater than '+${num2}" ></span>
+</p>
+<p th:if="${num2>num1}">
+  <span th:text="${num2}+' is greater than '+${num1}" ></span>
+
+</p>
+
+
+</body>
+</html>

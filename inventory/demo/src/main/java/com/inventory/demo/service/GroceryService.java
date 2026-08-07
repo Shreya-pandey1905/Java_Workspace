@@ -44,7 +44,7 @@ public Grocery getName(String name){
         grocery1.setPrice(grocery.getPrice());
         grocery1.setDiscount(grocery.getDiscount());
         grocery1.setCategory(grocery.getCategory());
-        grocery1.setQuality(grocery.getQuality());
+        grocery1.setQuantity(grocery.getQuantity());
         groceryRepo.save(grocery1);
     }
 
