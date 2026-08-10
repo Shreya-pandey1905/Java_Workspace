@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .footer {
+            margin-top: 40px;
+            padding: 25px 20px;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer p {
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .footer p:first-child {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .footer p:last-child {
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body>
+
+    <footer th:fragment="footer" class="footer">
+        <p>&copy; 2026 Employee Management System. All Rights Reserved.</p>
+        <p>Developed using Spring Boot & Thymeleaf</p>
+    </footer>
+
+
+
+</body>
+</html>

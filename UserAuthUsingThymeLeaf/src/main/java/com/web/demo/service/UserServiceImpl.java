@@ -1,5 +1,6 @@
 package com.web.demo.service;
 
+import com.web.demo.Exceptions.EmployeeNotExistException;
 import com.web.demo.entities.Users;
 import com.web.demo.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Users checkUser(Users users) {
-        return userRepo.findByEmailAndPassword(users.getEmail(),users.getPassword());
+
+        Users users1=userRepo.findByEmailAndPassword(users.getEmail(),users.getPassword());
+        if (users1 !=null){
+            return users1;
+        }else {
+            throw new EmployeeNotExistException("Employee dont exist");
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.web.demo.controller;
 
+import com.web.demo.Exceptions.EmployeeNotExistException;
+import com.web.demo.Exceptions.GenericException;
 import com.web.demo.entities.Users;
 import com.web.demo.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +73,12 @@ public class UserAuthController {
         return "redirect:/loginUser";
     }
 
+//
+//@GetMapping("/generic")
+//   public String generic()
+//{
+//    throw new GenericException("generic exception");
+//}
 
 
 }
