@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -14,7 +13,8 @@ import lombok.ToString;
 @ToString
 public class Employees {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "First Name required")
@@ -42,7 +42,6 @@ public class Employees {
     @Column(nullable = false)
     private String designation;
 
-    @NotBlank(message = "Salary is required")
     @Column(nullable = false) // jpa
     @Positive(message = "salary must be greater than 0")
     private Double salary;

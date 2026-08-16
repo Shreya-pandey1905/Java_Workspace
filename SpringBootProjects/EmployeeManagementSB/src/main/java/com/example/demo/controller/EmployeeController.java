@@ -44,7 +44,7 @@ public class EmployeeController {
        return "employees/employee-form";
     }
 
-    @GetMapping("/saveEmployees")
+    @PostMapping("/save")
     public String saveEmployee(@Valid @ModelAttribute Employees employee, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
 
         if (employee.getEmail()!= null && employeeService.emailExists(employee.getEmail())){
@@ -63,8 +63,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/view/{id}")
-    public  String viewEmployee(@PathVariable Long id, Model model){
-        Employees employees = employeeService.getEmployeeById(id);
+    public String viewEmployee(@PathVariable Long id, Model model){
+
+        Employees employee = employeeService.getEmployeeById(id);
+
+        model.addAttribute("employee", employee);
+
         return "employees/employee-view";
     }
 
