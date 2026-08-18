@@ -13,7 +13,7 @@ public class Products {
     private Integer id;
     private String name;
     private Double price;
-    private String stoke;
+    private String stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
