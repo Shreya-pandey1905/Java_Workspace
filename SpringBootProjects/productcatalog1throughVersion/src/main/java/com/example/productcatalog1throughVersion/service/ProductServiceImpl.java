@@ -5,6 +5,9 @@ import com.example.productcatalog1throughVersion.entity.Products;
 import com.example.productcatalog1throughVersion.exception.ResourceNotFoundException;
 import com.example.productcatalog1throughVersion.repository.ProductsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,36 +48,39 @@ public class ProductServiceImpl implements ProductService{
         return productsRepo.findByCategory(category);
     }
 
-    @Override
+    @Cacheable(value = "products", key = "#id")
+        @Override
     public Products findById(Long id) {
         return productsRepo.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Products not found"));
     }
 
+    @CachePut(value = "products", key = "#id")
+    public Products updateProducts(Long id , ReqDto reqDto){
+        Products product = findById(id);
+        product.setName(reqDto.getName());
+        product.setCategory(reqDto.getCategory());
+        product.setPrice(reqDto.getPrice());
+        product.setStock(reqDto.getStock());
+        return productsRepo.save(product);
+    }
+
+    @CacheEvict(value = "products", key = "#id")
     @Override
     public void deleteById(Long id) {
          productsRepo.deleteById(id);
     }
 
     @Override
-    public void createAllProducts(List<ReqDto> reqDtos) {
-
-        List<Products> products = new ArrayList<>();
-
-        for (ReqDto reqDto : reqDtos) {
+    public Products createAllProducts(ReqDto reqDto) {
 
             Products product = new Products();
-
             product.setName(reqDto.getName());
             product.setCategory(reqDto.getCategory());
             product.setPrice(reqDto.getPrice());
             product.setStock(reqDto.getStock());
 
-
-            products.add(product);
-        }
-
-         productsRepo.saveAll(products);
+       return productsRepo.save(product);
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.productcatalog1throughVersion;
+package com.example.productcatalog1throughVersion.Controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,13 +1,19 @@
 package com.example.productcatalog1throughVersion.Controller;
 
+import com.example.productcatalog1throughVersion.DTO.ReqDto;
 import com.example.productcatalog1throughVersion.entity.Products;
 import com.example.productcatalog1throughVersion.response.ApiResponse;
+import com.example.productcatalog1throughVersion.service.IdempotencyService;
 import com.example.productcatalog1throughVersion.service.ProductService;
+import com.example.productcatalog1throughVersion.service.ProductServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -15,9 +21,12 @@ import java.util.List;
 @RequestMapping("/products")
 
 public class ProductsController {
+    @Autowired
+    IdempotencyService idempotencyService;
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productService;
+
 
     @GetMapping("/getAll")
     public ResponseEntity<ApiResponse<Page<Products>>> getAll(@RequestParam(defaultValue = "0") int page,
@@ -64,4 +73,28 @@ public class ProductsController {
     public void deleteById(@PathVariable Long id){
         productService.deleteById(id);
     }
+
+    @PostMapping("/createProduct")
+    public ResponseEntity<ApiResponse<Products>> createProduct(@RequestHeader("Idempotency-Key") String idempotencyKey, @Valid @RequestBody ReqDto request){
+        if (idempotencyService.isProcessed(idempotencyKey)){
+            Long existingProductId = idempotencyService.getProductsId(idempotencyKey);
+            Products existingProduct=productService.findById(existingProductId);
+
+            ApiResponse<Products> response = ApiResponse.<Products>builder().success(true).msg("Request already processed").data(existingProduct).build();
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+
+        }
+        Products products = productService.createAllProducts(request);
+        idempotencyService.save(idempotencyKey, products.getId());
+
+        ApiResponse<Products> response = ApiResponse.<Products>builder().
+                success(true)
+                .msg("Products created successfully")
+                .data(products).build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
 }

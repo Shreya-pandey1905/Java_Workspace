@@ -20,6 +20,8 @@ public interface ProductService {
 
    void deleteById(Long id);
 
-   void createAllProducts( List<ReqDto> products);
+   Products createAllProducts( ReqDto products);
+
+
 
 }
