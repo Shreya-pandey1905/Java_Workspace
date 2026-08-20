@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+
 public class ProductServiceImpl implements ProductService{
 
     @Autowired
@@ -49,7 +51,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Cacheable(value = "products", key = "#id")
-        @Override
+    @Override
     public Products findById(Long id) {
         return productsRepo.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Products not found"));
