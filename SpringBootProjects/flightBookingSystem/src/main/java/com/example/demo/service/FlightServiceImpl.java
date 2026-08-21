@@ -5,6 +5,7 @@ import com.example.demo.entities.Flights;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.FlightsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class FlightServiceImpl implements FlightService{
         return flightsRepository.findAll();
     }
 
+    @CacheEvict(value = "flights", key = "#id")
     @Override
     public void deleteById(Long id) {
          flightsRepository.deleteById(id);
