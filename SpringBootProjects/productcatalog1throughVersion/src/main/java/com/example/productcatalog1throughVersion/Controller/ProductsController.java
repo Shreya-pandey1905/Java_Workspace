@@ -75,12 +75,17 @@ public class ProductsController {
     }
 
     @PostMapping("/createProduct")
-    public ResponseEntity<ApiResponse<Products>> createProduct(@RequestHeader("Idempotency-Key") String idempotencyKey, @Valid @RequestBody ReqDto request){
+    public ResponseEntity<ApiResponse<Products>> createProduct(@RequestHeader("Idempotency-Key") String idempotencyKey,
+
+                                                               @Valid @RequestBody ReqDto request){
         if (idempotencyService.isProcessed(idempotencyKey)){
             Long existingProductId = idempotencyService.getProductsId(idempotencyKey);
             Products existingProduct=productService.findById(existingProductId);
 
-            ApiResponse<Products> response = ApiResponse.<Products>builder().success(true).msg("Request already processed").data(existingProduct).build();
+            ApiResponse<Products> response = ApiResponse.<Products>builder()
+                    .success(true)
+                    .msg("Request already processed")
+                    .data(existingProduct).build();
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
@@ -95,6 +100,38 @@ public class ProductsController {
                 .data(products).build();
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/updateProduct/{id}")
+    public ResponseEntity<ApiResponse<Products>> updateProduct(
+          //  @RequestHeader("Idempotency-Key") String idempotencyKey,
+            @PathVariable Long id,
+            @Valid @RequestBody ReqDto request) {
+
+//        if (idempotencyService.isProcessed(idempotencyKey)) {
+//            Long existingProductId = idempotencyService.getProductsId(idempotencyKey);
+//            Products existingProduct = productService.findById(existingProductId);
+//            ApiResponse<Products> response =
+//                    ApiResponse.<Products>builder()
+//                            .success(true)
+//                            .msg("Request already processed")
+//                            .data(existingProduct)
+//                            .build();
+//
+//            return ResponseEntity.status(HttpStatus.OK).body(response);
+//        }
+
+       Products updatedProduct = productService.updateProducts(id, request);
+      //  idempotencyService.save(idempotencyKey, updatedProduct.getId());
+
+        ApiResponse<Products> response =
+                ApiResponse.<Products>builder()
+                        .success(true)
+                        .msg("Product updated successfully")
+                        .data(updatedProduct)
+                        .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

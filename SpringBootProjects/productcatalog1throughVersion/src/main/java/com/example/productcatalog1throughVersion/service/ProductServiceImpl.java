@@ -57,15 +57,7 @@ public class ProductServiceImpl implements ProductService{
                 .orElseThrow(()-> new ResourceNotFoundException("Products not found"));
     }
 
-    @CachePut(value = "products", key = "#id")
-    public Products updateProducts(Long id , ReqDto reqDto){
-        Products product = findById(id);
-        product.setName(reqDto.getName());
-        product.setCategory(reqDto.getCategory());
-        product.setPrice(reqDto.getPrice());
-        product.setStock(reqDto.getStock());
-        return productsRepo.save(product);
-    }
+
 
     @CacheEvict(value = "products", key = "#id")
     @Override
@@ -85,5 +77,19 @@ public class ProductServiceImpl implements ProductService{
        return productsRepo.save(product);
     }
 
+    @CachePut(value = "products", key = "#id")
+    @Override
+    public Products updateProducts(Long id, ReqDto reqDto) {
+            Products product = findById(id);
+            product.setName(reqDto.getName());
+            product.setCategory(reqDto.getCategory());
+            product.setPrice(reqDto.getPrice());
+            product.setStock(reqDto.getStock());
+            return productsRepo.save(product);
+        }
+
 
 }
+
+
+

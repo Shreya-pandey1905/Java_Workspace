@@ -22,6 +22,7 @@ public interface ProductService {
 
    Products createAllProducts( ReqDto products);
 
+   Products updateProducts(Long id , ReqDto reqDto);
 
 
 }
