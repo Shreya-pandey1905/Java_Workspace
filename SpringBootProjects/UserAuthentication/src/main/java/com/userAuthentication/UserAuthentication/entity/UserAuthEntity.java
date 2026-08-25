@@ -25,5 +25,7 @@ public class UserAuthEntity {
     private String email;
 
     @Column(nullable = false)
+
+
     private String role;
 }

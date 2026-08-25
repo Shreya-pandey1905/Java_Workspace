@@ -19,6 +19,12 @@ public class SecurityFilterConfig {
             httpSecurity.authorizeHttpRequests(request ->request
                     .requestMatchers("/users/registerUser")
                     .permitAll()
+                     .requestMatchers("/users/loginUser").permitAll()
+                    .requestMatchers("/users/profile").authenticated()
+                   .requestMatchers("/users/update").authenticated()
+                    .requestMatchers("/users/getAll").hasRole("ADMIN")
+                    .requestMatchers("/users/getById/{id}").hasRole("ADMIN")
+
                     .anyRequest()
                     .authenticated()//not only register user authenticate to all apis
             );

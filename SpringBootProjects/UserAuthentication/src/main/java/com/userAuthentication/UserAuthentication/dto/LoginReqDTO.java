@@ -1,11 +1,8 @@
 package com.userAuthentication.UserAuthentication.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
+public class LoginReqDTO {
 
-public class UserAuthResponseDto {
+    @Size(min = 5, max = 50)
+    @NotBlank(message = "password is required")
+    private String password;
 
-    private Long id;
-
-
-    private String username;
-
+    @NotBlank(message = "Email is required")
+    @Email
     private String email;
 
-    private String role;
 }

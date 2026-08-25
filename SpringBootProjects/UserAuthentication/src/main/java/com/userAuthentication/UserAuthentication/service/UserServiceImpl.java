@@ -2,6 +2,8 @@ package com.userAuthentication.UserAuthentication.service;
 
 import com.userAuthentication.UserAuthentication.config.ModelMapperConfig;
 import com.userAuthentication.UserAuthentication.config.SecurityFilterConfig;
+import com.userAuthentication.UserAuthentication.dto.LoginReqDTO;
+import com.userAuthentication.UserAuthentication.dto.ProfileUpdateDto;
 import com.userAuthentication.UserAuthentication.dto.UserAuthRequestDto;
 import com.userAuthentication.UserAuthentication.dto.UserAuthResponseDto;
 import com.userAuthentication.UserAuthentication.entity.UserAuthEntity;
@@ -10,9 +12,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     ModelMapper modelMapper;
 
-    private final SecurityFilterConfig securityFilterConfig;
+    private final PasswordEncoder passwordEncoder;
 
 
 
@@ -36,7 +42,7 @@ public class UserServiceImpl implements UserService {
     public UserAuthResponseDto registerUser(UserAuthRequestDto requestDto) {
 
         UserAuthEntity user= modelMapper.map(requestDto,UserAuthEntity.class);
-        user.setPassword(securityFilterConfig.passwordEncrypt().encode(requestDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
 
         UserAuthEntity userAuthEntity= userAuthRepo.save(user);
          return modelMapper.map(userAuthEntity,UserAuthResponseDto.class);
@@ -44,10 +50,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserAuthResponseDto> findAll() {
-        List<UserAuthEntity> users =  userAuthRepo.findAll();
+
+        List<UserAuthEntity> users =  userAuthRepo.findByRole("USER");
+
         List<UserAuthResponseDto> dtoList = new ArrayList<>();
 
-        for (UserAuthEntity user : users) {
+             for (UserAuthEntity user : users) {
             UserAuthResponseDto resDto = modelMapper.map(user,UserAuthResponseDto.class);
             dtoList.add(resDto);
         }
@@ -59,6 +67,42 @@ public class UserServiceImpl implements UserService {
         UserAuthEntity user = userAuthRepo.findById(id).get();
         UserAuthResponseDto response =modelMapper.map(user, UserAuthResponseDto.class);
         return response;
+    }
+
+    @Override
+    public UserAuthResponseDto loginUser(LoginReqDTO reqDTO) {
+        UserAuthEntity user= userAuthRepo.findByEmail(reqDTO.getEmail())
+                .orElseThrow(()->new UsernameNotFoundException("User not available"));
+
+        String password =user.getPassword();
+        if (passwordEncoder.matches(reqDTO.getPassword(),password)){
+            UserAuthResponseDto response =modelMapper.map(user, UserAuthResponseDto.class);
+            return response;
+        }
+         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid Credentials");
+
+    }
+
+    @Override
+    public UserAuthResponseDto updateUser(ProfileUpdateDto request,UserDetails userDetails) {
+        UserAuthEntity user = userAuthRepo.findByEmail(userDetails.getUsername())
+                .orElseThrow(()-> new UsernameNotFoundException("User not available"));
+
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        UserAuthEntity userAuthEntity= userAuthRepo.save(user);
+        return modelMapper.map(userAuthEntity,UserAuthResponseDto.class);
+    }
+
+    @Override
+    public UserAuthResponseDto getUserProfile(String username) {
+       UserAuthEntity user=userAuthRepo.findByEmail(username)
+               .orElseThrow(()->new UsernameNotFoundException("User not available"));
+        UserAuthResponseDto response =modelMapper.map(user, UserAuthResponseDto.class);
+        return response;
+
     }
 
 
