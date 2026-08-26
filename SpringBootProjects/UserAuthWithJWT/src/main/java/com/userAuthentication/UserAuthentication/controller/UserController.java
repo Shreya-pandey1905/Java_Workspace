@@ -1,9 +1,6 @@
 package com.userAuthentication.UserAuthentication.controller;
 
-import com.userAuthentication.UserAuthentication.dto.LoginReqDTO;
-import com.userAuthentication.UserAuthentication.dto.ProfileUpdateDto;
-import com.userAuthentication.UserAuthentication.dto.UserAuthRequestDto;
-import com.userAuthentication.UserAuthentication.dto.UserAuthResponseDto;
+import com.userAuthentication.UserAuthentication.dto.*;
 import com.userAuthentication.UserAuthentication.entity.UserAuthEntity;
 import com.userAuthentication.UserAuthentication.service.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -49,9 +46,9 @@ public class UserController {
     }
 
     @PostMapping("/loginUser")
-    public ResponseEntity<UserAuthResponseDto> loginUser(@RequestBody LoginReqDTO request){
-        UserAuthResponseDto userAuthResponseDto = userService.loginUser(request);
-        return ResponseEntity.ok().body(userAuthResponseDto);
+    public ResponseEntity<LoginResponseDto> loginUser(@RequestBody LoginReqDTO request){
+        LoginResponseDto responseDto = userService.loginUser(request);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @GetMapping("/profile")
