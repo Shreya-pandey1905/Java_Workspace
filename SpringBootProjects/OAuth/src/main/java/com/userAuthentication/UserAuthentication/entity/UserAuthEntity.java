@@ -1,0 +1,35 @@
+package com.userAuthentication.UserAuthentication.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Data
+@ToString
+public class UserAuthEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = true)
+      private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+   private String role;
+
+    @Column(nullable = true)
+    private String provider; // example github
+
+    @Column(nullable = true)
+    private String providerId; // generated id by github
+}
