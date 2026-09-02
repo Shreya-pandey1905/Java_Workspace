@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Calculation</h1>
+    <br>
+     <form action="" name="f1">
+        <label for="">Enter first number:</label>
+   
+        <input type="num1" name="n1" id="">
+        <br>
+         <label for="">Enter second number:</label>
+       <input type="num2" name="n2" id="">
+        <br>
+         <br>
+        <input type="button" value="Add" onclick="add()"></button>
+        <input type="button" value="Subtract" onclick="subtract()"></button>
+        <input type="button" value="Multiply" onclick="multiply()"></button>
+        <input type="button" value="Divide" onclick="divide()"></button>
+    
+        
+    </form>
+    <div id="print">
+
+    </div>
+</body>
+
+<script>
+   
+
+    function add(){
+         var num1= parseInt(f1.n1.value);
+         var num2= parseInt(f1.n2.value);
+         document.getElementById("print").innerHTML="sum:"+(num1+num2)
+    }
+
+      function subtract(){
+       var num1= parseInt(f1.n1.value);
+       var num2= parseInt(f1.n2.value);
+       document.getElementById("print").innerHTML="subtraction:"+(num1-num2)
+    } 
+
+     function multiply(){
+         var num1= parseInt(f1.n1.value);
+         var num2= parseInt(f1.n2.value);
+         document.getElementById("print").innerHTML="multiplication:"+(num1*num2)
+    }  
+    
+    function divide(){
+         var num1= parseInt(f1.n1.value);
+    var num2= parseInt(f1.n2.value);
+document.getElementById("print").innerHTML="divide:"+(num1/num2)
+    }
+
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" name="f1">
+
+         <label for="">Enter Course:</label>
+         <select name="course"  onchange="totalFees()">
+            <option value="" selected>Select Course</option>
+            <option value="java" >Java</option>
+            <option value="SQL">SQL</option>
+            <option value="Physics">Physics</option>
+         </select>
+<br>
+        <label for="">Enter Total Fees:</label>
+        <input type="number" name="fees" id="" readonly>
+<br>
+        <label for="">Caste:</label>
+
+        <input type="radio" name="caste" onclick="concession(1)">SC
+        <input type="radio" name="caste" onclick="concession(2)">ST
+        <input type="radio" name="caste" onclick="concession(3)">General
+
+<br>
+        <label for="">Concession Fees</label>
+         <input type="number" name="concession1" readonly>
+<br>
+        <label for="">Paid Amount</label>
+         <input type="number" name="paidAmt">
+<br>
+
+        <input type="button" value="Calculate" onclick="dueAmt()"></button>
+
+
+  <div id="dueAmt">
+
+    </div>
+      
+    </form>
+</body>
+
+<script>
+ function totalFees(){
+        let courseid= f1.course.selectedIndex;
+       
+        if(courseid==1){
+                f1.fees.value=40000;
+        }else if(courseid==2){
+            f1.fees.value=20000;
+        }else if(courseid==3){
+            f1.fees.value=60000;
+        }
+    }
+
+    function concession(i){
+        
+        if(i==1){
+             f1.concession1.value=200;
+        }else if(i==2){
+            f1.concession1.value=100;
+        
+        }else{
+            f1.concession1.value=500;
+        }
+    }
+
+    function dueAmt(){
+        var totalFees=parseInt(f1.fees.value);
+        var concessions=parseInt(f1.concession1.value);
+        var paidAmt = parseInt(f1.paidAmt.value);
+
+        document.getElementById("dueAmt").innerHTML="Due Amount:"+(totalFees-(concessions+paidAmt));
+
+
+    }
+
+</script>
+</html>

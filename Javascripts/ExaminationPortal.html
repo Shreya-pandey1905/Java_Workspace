@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="" name="f1">
+        <label for="">What is Molecular formula of Hydrochoric acid?</label>
+        <br>
+        <input type="radio" name="ans1" id="" value="H2O" onclick="answer(1)">H2O
+        <input type="radio" name="ans2" id="" value="H2SO4" onclick="answer(2)">H2SO4
+        <br>
+        <input type="radio" name="ans3" id="" value="KCL" onclick="answer(3)">KCL
+        <input type="radio" name="ans4" id="" value="HCL" onclick="answer(4)">HCL
+        <br><br>
+
+        <input type="button" name="" id="b1" value="Submit" onclick="">
+        <input type="button" value="Next" id="b2" disabled>
+
+
+    </form>
+    <div id="answer">
+
+    </div>
+
+    <script>
+        setTimeout(()=>{
+                document.getElementById("b1").disabled=false;
+                document.getElementById("b2").disabled=true;
+        },1000)
+
+        var answer=(i)=>{
+            document.getElementById("b2").disabled=false;
+
+            var ans1= f1.ans1.value;
+            var ans2= f1.ans2.value;
+            var ans3= f1.ans3.value;
+            var ans4= f1.ans4.value;
+        if(i==1){
+           document.getElementById("answer").innerHTML="Your answer is :" + ans1;
+        } 
+          if(i==2){
+           document.getElementById("answer").innerHTML="Your answer is :" + ans2;
+        }   if(i==3){
+           document.getElementById("answer").innerHTML="Your answer is :" + ans3;
+        }   if(i==4){
+           document.getElementById("answer").innerHTML="Your answer is :" + ans4;
+        } 
+      
+
+
+
+        }
+    </script>
+    
+</body>
+</html>
