@@ -10,11 +10,11 @@
     <form action="" name="f1">
         <label for="">What is Molecular formula of Hydrochoric acid?</label>
         <br>
-        <input type="radio" name="ans1" id="" value="H2O" onclick="answer(1)">H2O
-        <input type="radio" name="ans2" id="" value="H2SO4" onclick="answer(2)">H2SO4
+        <input type="radio" name="ans" id="" value="H2O" onclick="answer(1)">H2O
+        <input type="radio" name="ans" id="" value="H2SO4" onclick="answer(2)">H2SO4
         <br>
-        <input type="radio" name="ans3" id="" value="KCL" onclick="answer(3)">KCL
-        <input type="radio" name="ans4" id="" value="HCL" onclick="answer(4)">HCL
+        <input type="radio" name="ans" id="" value="KCL" onclick="answer(3)">KCL
+        <input type="radio" name="ans" id="" value="HCL" onclick="answer(4)">HCL
         <br><br>
 
         <input type="button" name="" id="b1" value="Submit" onclick="">
@@ -35,12 +35,12 @@
         var answer=(i)=>{
             document.getElementById("b2").disabled=false;
 
-            var ans1= f1.ans1.value;
-            var ans2= f1.ans2.value;
-            var ans3= f1.ans3.value;
-            var ans4= f1.ans4.value;
+            var ans1= f1.ans.value;
+            var ans2= f1.ans.value;
+            var ans3= f1.ans.value;
+            var ans4= f1.ans.value;
         if(i==1){
-           document.getElementById("answer").innerHTML="Your answer is :" + ans1;
+           document.getElementById("answer").innerHTML="<b>Your answer is :</b>" + ans1;
         } 
           if(i==2){
            document.getElementById("answer").innerHTML="Your answer is :" + ans2;

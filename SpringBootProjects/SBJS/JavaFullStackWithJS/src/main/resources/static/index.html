@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Java Full Stack App</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        // function fetchUsers() {
+        //     fetch('/api/users')// controller api
+        //         .then(response => response.json())
+        //         .then(users => {
+        //             document.getElementById('userList').innerHTML= users
+        //                 .map(user=> `<li> ${user.name}------${user.email}</li>`)
+        //                 .join(''); // combines every item in single list
+        //         })
+        // }
+
+        function fetchUsers() {
+            fetch('/api/users')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch users');
+                    }
+                    return response.json();
+                })
+                .then(users => {
+                    document.getElementById('userList').innerHTML = users
+                        .map(user => `
+                    <li class="user-card">
+
+                        <div class="user-info">
+                            <span class="user-name">${user.name}</span>
+                            <span class="user-email">${user.email}</span>
+                        </div>
+                    </li>
+                `)
+                        .join('');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function addUser() {
+            const  name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/api/users',{
+                method:'POST',
+                headers:{'Content-Type': 'application/json'} ,
+                body: JSON.stringify({name, email})// js obj to json string conversion
+        })
+                .then(()=>fetchUsers())
+        }
+
+        document.addEventListener("DOMContentLoaded", function (){
+            fetchUsers();
+        });
+
+    </script>
+</head>
+<body>
+
+<h1>User List</h1>
+<ul id="userList"></ul>
+<input type="text" placeholder="Name" id="name">
+<input type="email" placeholder="Email" id="email">
+<button onclick="addUser()">Add User</button>
+
+</body>
+</html>

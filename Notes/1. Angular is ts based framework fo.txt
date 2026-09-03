@@ -1,0 +1,34 @@
+1. Angular is ts based framework for building web applns
+2. It is developed and maintained y google and specially used for building large structure and 	interactive applns .
+
+3. Provides features such as:
+Components 
+Routing
+Forms
+Http Api communication
+Dependency injection
+Services
+Directives
+Pipes
+Testing tools
+CLI tooling
+
+# JS v/s Angular
+1. To access values in js we use user= doc.getElementByID(user)
+1. To access values in angular we use {{user}} --> this user will be defined in ts
+
+# SPA architecture
+1. Spa is single page application
+2. This is one of the most imp object for angular
+3. In a single page application browser initially loads one main html page 
+4. When we navigate between pages angular changes what is displayed without doing a complete browser page reload.
+5. e.g - Suppose your app have home , pdts , orders, profile and settings in spa the appln can load once and then dynamically displays these different views benefits
+
+1 . Faster navigation after initial loading .
+2. smooth user experience .
+3. less complete page reloading 
+4. good for dashboards and applns 
+5. frontend can communicate with backend apis
+6. e.g of applns which commonly use spa applns includes dashboards , admin panels , web mail applns etc  
+
+
