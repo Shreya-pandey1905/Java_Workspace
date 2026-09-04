@@ -1,0 +1,42 @@
+Angular project structure
+
+1. src/
+This is the most imp dir of the project , it contains the code which makes you angular application.
+
+2. main.ts
+It is the entry point of your angular application.
+
+3. src/App
+this is where most oof your application code will live 
+
+4. Components
+
+An anguar application is largely build from components
+e.g . It can have components like navbar , sidebar product list ,footer, each component controls a particular piece of ui.
+
+5. app.ts - this is your root component 
+@Component tells angular that this class represents an angular component.
+
+default tag will be <app-root>
+6. app.html - this contains component html part . the browser displays this template when the component is rendered.
+
+7. app.css/ app.compo.css= this contains styles for the component , modern angular comp can use comp scoped style meaning styles can be associated with that component rather than automatically becoming global.
+
+index.html --> <app.root> --> app component -[app.ts->html->app.css]
+
+your applications starts with main.ts ---> bootstrap appln --> app component --> app.html --> browser --> index.html
+
+8. index.html - this is the main html page , this is where your root angular component gets rendered .
+
+9. app.config.ts - it contains apppln level configuration like routing , http client , dependency injection , appln wide providers
+
+10. public - this is commonly used for static assets like logo.png , banner.jpg , favicon icon.
+Our appn can refer to those assets from this folder.
+
+11. package.json - package.json describes your project and its dependencies 
+
+12. node_modules - when we run npm install , npm downloads your projects dependencies into node_modules .
+
+13.angular.json- this is angular cli configuration , it tells angular cli , thinks about the project such as build configuration , assets , styles , scripts , development configuration , production configuration .
+
+14. ts config.json- angular uses ts , so this file contains typescript compiler configuration , it controls things related to ts compilation , module configuration , compiler options , strictness 

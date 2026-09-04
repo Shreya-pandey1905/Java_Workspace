@@ -32,3 +32,14 @@ CLI tooling
 6. e.g of applns which commonly use spa applns includes dashboards , admin panels , web mail applns etc  
 
 
+Building blocks for angular :
+1. Component controls a part of user interface
+2. The html associated witht he components is called templates
+
+3.A service is commonly use for resuable logic for communication with apis 
+
+4.Dependency injection- Instead of comp manually creating a service angular can inject service to component this makes application more modular and testable.
+5. Routing: Routing determines which comp should be displayd for the url
+
+6. Angular CLI: It is a tool that hepls you create , develop , build , and maintain angualr appln
+
