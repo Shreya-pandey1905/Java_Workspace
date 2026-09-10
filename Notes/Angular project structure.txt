@@ -11,7 +11,7 @@ this is where most oof your application code will live
 
 4. Components
 
-An anguar application is largely build from components
+An angular application is largely build from components
 e.g . It can have components like navbar , sidebar product list ,footer, each component controls a particular piece of ui.
 
 5. app.ts - this is your root component 
@@ -40,3 +40,25 @@ Our appn can refer to those assets from this folder.
 13.angular.json- this is angular cli configuration , it tells angular cli , thinks about the project such as build configuration , assets , styles , scripts , development configuration , production configuration .
 
 14. ts config.json- angular uses ts , so this file contains typescript compiler configuration , it controls things related to ts compilation , module configuration , compiler options , strictness 
+
+
+#Component
+A comp is a bulding block of an angular appln which has this config== Comp= UI+logic.
+
+-> Component lifecyle 
+1. Comp created 
+2. input proceeds
+3. initialization
+4. component changes
+5. component destroyed
+
+Angular provides lifecycle hooks that allows us to execute code at specific stages.
+Hooks:
+1. ngOnChanges()
+2. ngOnInit ()
+3. ngOnCheck()
+4.ngAfterContentInIt() .
+5. ngAfterContentChecked ()
+6. ngAfterViewInit()
+7. ngAfterViewChecked ()
+8. ngOnDestroy()

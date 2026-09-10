@@ -1,0 +1,59 @@
+:host {
+  display: block;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 22px;
+  font-size: 26px;
+  color: #0f1111;
+}
+
+.product {
+  background: white;
+  padding: 22px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #d5d9d9;
+  box-shadow: 0 2px 8px rgba(15, 17, 17, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(15, 17, 17, 0.15);
+}
+
+.product h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  color: #007185;
+}
+
+.product p {
+  margin: 8px 0 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f1111;
+}
+
+button {
+  border: 1px solid #fcd200;
+  background: #ffd814;
+  color: #0f1111;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #f7ca00;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}

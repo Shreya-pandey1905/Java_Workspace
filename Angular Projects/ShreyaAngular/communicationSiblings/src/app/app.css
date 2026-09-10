@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #eaeded;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  padding: 18px 30px;
+  background: #131921;
+  color: white;
+  font-size: 28px;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  max-width: 1300px;
+  margin: 30px auto;
+  padding: 0 25px;
+  align-items: flex-start;
+}
+
+/* Product section */
+app-product-list {
+  flex: 1;
+}
+
+/* Cart section */
+app-cart {
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #d5d9d9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,43 @@
+<p>cart works!</p>
+<h2>Cart( {{ cartService.cartCount()}})</h2>
+
+@if (cartService.cartItems().length===0) {
+    <p>Your cart is empty</p>
+}
+
+@for (item of cartService.cartItems(); track $index) {
+    <div class="cart-item">
+        <span>
+            {{item.name}}- {{item.price|currency:'INR'}}
+        </span>
+
+
+        <button (click)="cartService.removeProduct($index)">
+            Remove
+        </button>
+    </div>
+}
+
+<h2>
+    Cart Price
+</h2>
+
+@if (cartService.cartItems().length===0) {
+    <p>Your cart is empty</p>
+}
+
+@for (item of cartService.cartItems(); track $index) {
+    <div class>
+      {{item.name}} - {{item.price|currency:'INR'}}
+ 
+    </div>
+
+    
+        <button (click)="cartService.removeProduct($index)">
+            Remove
+        </button>
+}
+
+@if (cartService.cartItems().length>0) {
+    <h3>Total:{{cartService.totalPrice()|currency:'INR'}}</h3>
+}

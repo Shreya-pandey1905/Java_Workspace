@@ -1,0 +1,21 @@
+<p>product works!</p>
+@for(product of products(); track product.id){
+<app-cart
+[product]="product"
+()productSelected)="receiveProduct($event)"
+></app-cart>
+
+<hr>
+
+<!--child to parent-->
+<h2>Selected product</h2>
+
+@for (product of selectedProducts(); track $index){
+<p>
+  {{product.name}} - {{product.price| currency:'INR'}}
+</p>
+}
+
+
+
+}

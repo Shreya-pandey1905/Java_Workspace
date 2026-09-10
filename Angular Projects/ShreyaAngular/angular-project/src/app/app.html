@@ -1,0 +1,39 @@
+<div class="todo-app">
+  <h2>My Todo List</h2>
+  <p class="subtitle">Stay organised and get things done</p>
+
+  <div class="input-box">
+    <input
+      placeholder="What do you want to do?"
+      [value]="newTodo()"
+      (input)="newTodo.set($any($event.target).value)"
+    />
+
+    <button class="add-btn" (click)="addTodo()">Add Task</button>
+  </div>
+
+  <ul>
+    @for (todo of todos(); track $index) {
+      <li>
+        <span class="number">
+          {{ $index + 1 }}
+        </span>
+
+        <span
+          class="todo-text"
+          (click)="toggleTodo($index)"
+          [class.completed]="todo.done"
+        >
+          {{ todo.text }}
+        </span>
+
+        <button
+          class="delete-btn"
+          (click)="deleteTodo($index)"
+        >
+          Delete
+        </button>
+      </li>
+    }
+  </ul>
+</div>

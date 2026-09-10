@@ -1,14 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Pipeline } from './pipeline/pipeline';
-import { CustomPipPipe } from './pipe/custom-pip-pipe';
+import { ProductList } from './components/product-list/product-list';
 
 @Component({
-  imports: [RouterOutlet, Pipeline,CustomPipPipe],
+  imports: [RouterOutlet, ProductList],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('angular-project2');
+  protected readonly title = signal('communicationBetweenParentToChild');
 }

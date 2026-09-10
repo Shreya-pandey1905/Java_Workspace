@@ -1,0 +1,15 @@
+<p>cart works!</p>
+
+<div>
+  <h2>{{product().name}}</h2>
+
+  <p>Product Id :{{product().id}}</p>
+
+  <p>Price:{{product().price|currency:'INR'}}</p>
+
+  <button (click)="selectProduct()">
+    Select Product
+  </button>
+
+
+</div>
