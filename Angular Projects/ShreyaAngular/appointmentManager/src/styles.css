@@ -1,0 +1,464 @@
+:host {
+  display: block;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 35px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f8f9ff
+  );
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12);
+
+  animation: pageEnter 0.6s ease;
+}
+
+
+/* =========================
+   PAGE LOAD ANIMATION
+========================= */
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================
+   MAIN HEADING
+========================= */
+
+h1 {
+  text-align: center;
+
+  font-size: 38px;
+
+  margin-bottom: 8px;
+
+  background: linear-gradient(
+    90deg,
+    #4f46e5,
+    #7c3aed,
+    #2563eb
+  );
+
+  background-clip: text;
+
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+
+/* Subtitle */
+
+h1 + p {
+  text-align: center;
+
+  color: #6b7280;
+
+  font-size: 16px;
+
+  margin-bottom: 40px;
+}
+
+
+/* =========================
+   SECTION HEADINGS
+========================= */
+
+h2 {
+  color: #1f2937;
+
+  margin-top: 30px;
+
+  margin-bottom: 20px;
+
+  position: relative;
+
+  padding-bottom: 10px;
+}
+
+
+h2::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 70px;
+
+  height: 4px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    #4f46e5,
+    #7c3aed
+  );
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+label {
+  display: block;
+
+  margin-top: 18px;
+
+  margin-bottom: 8px;
+
+  color: #374151;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px 16px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  background: white;
+
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+
+
+input:hover {
+
+  border-color: #818cf8;
+
+}
+
+
+input:focus {
+
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.15);
+
+  transform: scale(1.01);
+}
+
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+button:first-of-type {
+
+  margin-top: 10px;
+
+  border: none;
+
+  padding: 13px 24px;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  color: white;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    90deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  box-shadow:
+    0 6px 16px rgba(79, 70, 229, 0.25);
+
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+
+button:first-of-type:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 22px rgba(79, 70, 229, 0.35);
+}
+
+
+button:first-of-type:active {
+
+  transform: scale(0.96);
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+hr {
+
+  border: none;
+
+  border-top: 1px solid #e5e7eb;
+
+  margin: 40px 0;
+}
+
+
+/* =========================
+   APPOINTMENT CARD
+========================= */
+
+.appointment-card {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+
+  border-radius: 16px;
+
+  background: white;
+
+  border-left: 5px solid #6366f1;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+
+  animation: cardEnter 0.4s ease;
+}
+
+
+/* New card entry */
+
+@keyframes cardEnter {
+
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+}
+
+
+/* Hover */
+
+.appointment-card:hover {
+
+  transform:
+    translateY(-5px)
+    scale(1.01);
+
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.12);
+
+  border-left-color: #7c3aed;
+}
+
+
+/* =========================
+   APPOINTMENT INFO
+========================= */
+
+.appointment-info h3 {
+
+  margin: 0 0 8px;
+
+  color: #111827;
+
+  font-size: 20px;
+}
+
+
+.appointment-info p {
+
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-btn {
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 10px;
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s,
+    color 0.3s,
+    transform 0.3s;
+}
+
+
+.delete-btn:hover {
+
+  background: #dc2626;
+
+  color: white;
+
+  transform: scale(1.07);
+}
+
+
+.delete-btn:active {
+
+  transform: scale(0.92);
+}
+
+
+/* =========================
+   EMPTY MESSAGE
+========================= */
+
+.empty-message {
+
+  text-align: center;
+
+  padding: 30px;
+
+  color: #6b7280;
+
+  background: #f9fafb;
+
+  border: 2px dashed #d1d5db;
+
+  border-radius: 14px;
+
+  animation: fadeIn 0.5s ease;
+}
+
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  :host {
+
+    margin: 20px;
+
+    padding: 22px;
+  }
+
+
+  h1 {
+
+    font-size: 29px;
+  }
+
+
+  .appointment-card {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
+  .delete-btn {
+
+    width: 100%;
+  }
+
+
+  button:first-of-type {
+
+    width: 100%;
+  }
+
+}
