@@ -1,0 +1,4 @@
+<p>edit-profile works!</p>
+
+<input [value]="name()" (input)="updateName($any($event.target).value)" type="text">
+<button (click)="save()">Save</button>
