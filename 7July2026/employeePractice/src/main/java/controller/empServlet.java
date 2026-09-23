@@ -37,7 +37,7 @@ public class empServlet extends HttpServlet {
        double esal = Double.parseDouble(req.getParameter("esal"));
        int mid = Integer.parseInt(req.getParameter("mid"));
 
-            emp employee = new emp(0, eName, esal, mid);
+           emp employee = new emp(0, eName, esal, mid);
            employeeService.addEmp(employee);
 
 
