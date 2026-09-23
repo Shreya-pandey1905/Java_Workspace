@@ -12,14 +12,25 @@ public class JwtService {
 
     private final String SECRET = "myverysecretkeymyverysecretkey123456";
 
-    public String generateToken(String username) {
+    public String generateAccessToken(String username) {
 
         SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60))
+                .signWith(key)
+                .compact();
+    }
+
+    public String generateRefreshToken(String username) {
+        SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
+
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 10))
                 .signWith(key)
                 .compact();
     }

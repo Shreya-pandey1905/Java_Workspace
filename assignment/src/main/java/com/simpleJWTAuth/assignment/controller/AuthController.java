@@ -1,5 +1,6 @@
 package com.simpleJWTAuth.assignment.controller;
 
+import com.simpleJWTAuth.assignment.model.AuthResponse;
 import com.simpleJWTAuth.assignment.model.User;
 import com.simpleJWTAuth.assignment.service.JwtService;
 import com.simpleJWTAuth.assignment.service.UserService;
@@ -19,24 +20,28 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-
         return userService.register(user);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public AuthResponse login(@RequestBody User user) {
 
-        User loggedInUser = userService.login(
-                user.getUsername(),
-                user.getPassword()
+        User loggedInUser = userService.login(user.getUsername(),user.getPassword());
+
+        String accessToken = jwtService.generateAccessToken(
+                        loggedInUser.getUsername() );
+
+        String refreshToken =jwtService.generateRefreshToken(
+                        loggedInUser.getUsername() );
+
+        return new AuthResponse(
+                accessToken,
+                refreshToken
         );
-
-        return jwtService.generateToken(loggedInUser.getUsername());
     }
 
     @GetMapping("/hello")
     public String hello() {
-
         return "Hello, authenticated user!";
     }
 }
