@@ -1,10 +1,14 @@
 package com.simpleJWTAuth.assignment.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.simpleJWTAuth.assignment.model.AuthResponse;
 import com.simpleJWTAuth.assignment.model.User;
 import com.simpleJWTAuth.assignment.service.JwtService;
 import com.simpleJWTAuth.assignment.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -44,4 +48,7 @@ public class AuthController {
     public String hello() {
         return "Hello, authenticated user!";
     }
+
+
+
 }
