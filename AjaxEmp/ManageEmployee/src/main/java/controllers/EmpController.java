@@ -23,14 +23,7 @@ public class EmpController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-//    public EmpController() {
-//        super();
-//        // TODO Auto-generated constructor stub
-//    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request,
 	                     HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,16 +36,24 @@ public class EmpController extends HttpServlet {
 
 			Gson gson = new Gson();
 			String json = gson.toJson(emps);
-
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-
 			response.getWriter().write(json);
 			return;
 		}
 
 		if ("searchEmployees".equals(action)) {
-			// Search employee logic goes here
+
+			String name = request.getParameter("name");
+			var emps = empservice1.searchEmployees(name);
+			Gson gson = new Gson();
+			String json = gson.toJson(emps);
+			response.getWriter().write(json);
+			return;
+		}
+		if ("getManagers".equals(action)) {
+			var managers = empservice1.getManager();
+			Gson gson = new Gson();
+			String json = gson.toJson(managers);
+		    response.getWriter().write(json);
 			return;
 		}
 
@@ -85,7 +86,9 @@ public class EmpController extends HttpServlet {
 	}
 		doGet(request, response);
 	}
-	
+
+
+
 	
 
 }

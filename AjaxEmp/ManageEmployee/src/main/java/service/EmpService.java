@@ -24,6 +24,10 @@ public class EmpService {
 				.filter(emp -> emp.getSalary() >= 5000)
 				.toList();
 	}
+
+	public List<Employee> searchEmployees(String name) {
+		return dao.searchEmployees(name);
+	}
 	
 	
 }
