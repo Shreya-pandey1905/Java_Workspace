@@ -36,21 +36,16 @@ public class JwtAuthfilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             try {
-
                 String username = jwtService.extractUsername(token);
-
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(
+            UsernamePasswordAuthenticationToken authentication =new UsernamePasswordAuthenticationToken(
                                 username,
                                 null,
                                 Collections.emptyList()
                         );
 
-                SecurityContextHolder.getContext()
-                        .setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
             } catch (Exception e) {
-
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }

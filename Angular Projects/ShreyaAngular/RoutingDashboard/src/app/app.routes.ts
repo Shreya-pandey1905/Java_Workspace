@@ -17,10 +17,7 @@ export const routes: Routes = [
   canMatch: [adminGuardGuard],
   loadComponent: () => import('./Pages/admin/admin').then(m => m.Admin)
 },
-{
-  path: 'edit-profile',
-  component: EditProfile,
-  canDeactivate: [editProfileGuard]
-}
+
+
 
 ];

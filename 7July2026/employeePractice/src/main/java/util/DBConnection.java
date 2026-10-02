@@ -3,7 +3,7 @@ package util;
 import java.sql.Connection;
 
 public class DBConnection {
-    private  String URL = "jdbc:mysql://localhost:3306/em";
+    private  String URL = "jdbc:mysql://localhost:3307/em";
     private  String USER = "root";
     private  String PASSWORD = "";
 

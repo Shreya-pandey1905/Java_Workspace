@@ -1,0 +1,15 @@
+<h1>Main Page</h1>
+<pre>let's go</pre>
+
+<hr>
+
+<app-employee-form (employeeAdded)="onEmployeeAdded($event)"></app-employee-form>
+
+
+
+
+<app-employee-list 
+    [employees]="employees()" 
+    (deleteRequested)="onDeleteEmployee($event)"
+
+></app-employee-list>

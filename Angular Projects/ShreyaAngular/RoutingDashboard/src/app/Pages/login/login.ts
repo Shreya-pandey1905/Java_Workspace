@@ -16,6 +16,11 @@ export class Login {
     this.authservice.login();
     this.router.navigate(['/dashboard']);
   }
+
+  loginAsAdmin(){
+    this.authservice.loginAsAdmin();
+    this.router.navigate(['/admin']);
+  }
 }
 
 

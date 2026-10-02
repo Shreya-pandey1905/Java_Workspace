@@ -13,7 +13,9 @@ import java.util.List;
 public class empDao {
 
     DBConnection dbcon = new DBConnection();
+
     public void addEmp(emp emp) {
+
         String sql = "insert into Employee(eid, ename, esal, mid) values(?,?,?,?)";
 
         try(Connection connection = dbcon.getConnection();
