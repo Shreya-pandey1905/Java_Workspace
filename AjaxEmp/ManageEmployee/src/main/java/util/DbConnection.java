@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DbConnection {
 	
 	
-	static String url="jdbc:mysql://localhost:3306/hrms_ajax";
+	static String url="jdbc:mysql://localhost:3307/hrms_ajax";
 	static String userName = "root";
 	static String password="";
 	public static Connection getConnetion() throws ClassNotFoundException, SQLException

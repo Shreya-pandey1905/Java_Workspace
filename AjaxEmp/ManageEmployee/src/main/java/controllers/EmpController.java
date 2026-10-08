@@ -31,17 +31,13 @@ public class EmpController extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("getEmp".equals(action)) {
-
 			var emps = empservice1.getAllEmployeeSalaryGetter();
-
 			Gson gson = new Gson();
 			String json = gson.toJson(emps);
 			response.getWriter().write(json);
 			return;
 		}
-
 		if ("searchEmployees".equals(action)) {
-
 			String name = request.getParameter("name");
 			var emps = empservice1.searchEmployees(name);
 			Gson gson = new Gson();
@@ -56,36 +52,49 @@ public class EmpController extends HttpServlet {
 		    response.getWriter().write(json);
 			return;
 		}
-
 		response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 				"Invalid or missing action");
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int noofrecords = Integer.parseInt(request.getParameter("noofrecord")); 
-		if(noofrecords != 0) {
-			
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String action = request.getParameter("action");
+
+		if ("addEmployee".equals(action)) {
+
+			String name = request.getParameter("name");
+			double salary = Double.parseDouble(request.getParameter("salary"));
+			int mid = Integer.parseInt(request.getParameter("mid"));
+
+			if (name != null && !name.isBlank() && salary > 0) {
+
+				EmpDto dto = new EmpDto();
+
+				dto.setName(name);
+				dto.setSalary(salary);
+				dto.setmId(mid);
+
+				empservice1.addEmp(dto);
+
+				response.setContentType("application/json");
+
+				response.getWriter().write(
+						"{\"success\":true,\"message\":\"Employee added successfully\"}"
+				);
+			}
+			else {
+				response.setContentType("application/json");
+				response.getWriter().write(
+						"{\"success\":false,\"message\":\"Invalid employee details\"}"
+				);
+			}
 		}
-		
-		
-		
-		
-		String name = request.getParameter("name");
-		double salary= Double.parseDouble(request.getParameter("salary"));
-		int mid = Integer.parseInt(request.getParameter("mid"));
-		System.out.println(name + salary + mid );
-		if((name!= null|| !name.isBlank()) && salary>0) {
-			EmpDto dto = new EmpDto();
-			dto.setName(name);
-			dto.setSalary(salary);
-			dto.setmId(mid);
-			empservice1.addEmp(dto);
-			response.getWriter().write("<script> alert('Employee added')</script>");
 	}
-		doGet(request, response);
-	}
+
 
 
 

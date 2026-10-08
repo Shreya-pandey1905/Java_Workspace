@@ -31,7 +31,7 @@ crossorigin="anonymous"></script>
 <br>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+<button type="button" class="btn btn-primary" id="modalBtn">
   Add Employees
 </button>
 

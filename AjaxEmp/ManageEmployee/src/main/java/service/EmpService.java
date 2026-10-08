@@ -10,9 +10,6 @@ import java.util.List;
 public class EmpService {
 	EmpDAO dao=new EmpDAO();
 	
-	public void addEmp(EmpDto dto) {
-		dao.addEmployee(dto);
-	}
 	public List<Manager> getManager(){
 		return dao.getAllManagers();
 	}
@@ -27,6 +24,10 @@ public class EmpService {
 
 	public List<Employee> searchEmployees(String name) {
 		return dao.searchEmployees(name);
+	}
+
+	public void addEmp(EmpDto employee) {
+		 dao.addEmployee(employee);
 	}
 	
 	
