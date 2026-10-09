@@ -1,0 +1,10 @@
+<p>forms works!</p>
+
+<form action="" #empForm="ngForm" (ngSubmit)="SaveEmp(empForm.value)">
+    {{empForm.value | json}}
+  Name:  <input type="text" name="ename" #ename="ngModel" ngModel class="form-control">
+
+  Salary: <input type="text" class="form-control">
+ <input type="submit" value="Save" class="btn btn-primary">
+    
+</form>
