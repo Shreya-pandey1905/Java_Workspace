@@ -1,0 +1,7 @@
+<p>form2 works!</p>
+
+<form [formGroup]="emps" (ngSubmit)="SaveData(emps.value)">
+    Name <input type="text" class="form-control" formControlName="name">
+    Email <input type="text" class="form-control" formControlName="email">
+    <input type="submit" value="Save">
+</form>
