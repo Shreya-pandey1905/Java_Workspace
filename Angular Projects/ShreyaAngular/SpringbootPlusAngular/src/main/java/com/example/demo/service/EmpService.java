@@ -1,12 +1,19 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Employee;
+import com.example.demo.dto.EmpDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public interface EmpService {
 
-public interface EmpService {  Employee saveEmployee(Employee employee);
-    List<Employee> getAllEmployees();
-    Employee getEmployeeById(Long id);
-    Employee updateEmployee(Long id, Employee employee);
+    EmpDto addEmployee(EmpDto empDto);
+
+    List<EmpDto> getAllEmployees();
+
+    EmpDto getEmployeeById(Long id);
+
+    EmpDto updateEmployee(Long id, EmpDto empDto);
+
     void deleteEmployee(Long id);
 }
